@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="generalS.css">
 </head>
 <body>
+    <!--<script>
+        // Retrieve user information from localStorage
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        
+        // Display welcome message if user is logged in
+        /*if (loggedInUser) {
+            document.getElementById('welcome-message').textContent = `Welcome, ${loggedInUser}!`;
+        } else {
+            document.getElementById('welcome-message').textContent = 'You are not logged in.';
+        }*/
+    </script>-->
     <div id="welcome-message"></div>
     <header>
             <div class="left-section">
@@ -19,29 +30,33 @@
     </header>
     <div class="container">
         <div class="left-section-center">
-            <form id="search-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name">
-                <label for="number">Number:</label>
-                <input type="number" id="number" name="name">
-                <button type="submit">Search</button>
-            </form>
+            <div class="search-container">
+                <form id="search-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                    <label for="number">Number:</label>
+                    <input type="number" id="number" name="name">
+                    <label for="email">email:</label>
+                    <input type="email" id="email" name="email">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <div class="left-section-center">
+                <div>
+                    Current editing profile
+                </div>
+            </div>
         </div>
         <div class="right-section-center">
-            test right
+            <h1>Contacts:</h1>
+            <p>All know profiles</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="left-section-center">
+            All profiles that follow the current search algorithm
         </div>
     </div>
     <script src="contactJ.js"></script>
-    <!--<script>
-        // Retrieve user information from localStorage
-        const loggedInUser = localStorage.getItem('loggedInUser');
-        
-        // Display welcome message if user is logged in
-        /*if (loggedInUser) {
-            document.getElementById('welcome-message').textContent = `Welcome, ${loggedInUser}!`;
-        } else {
-            document.getElementById('welcome-message').textContent = 'You are not logged in.';
-        }*/
-    </script>-->
 </body>
 </html>
