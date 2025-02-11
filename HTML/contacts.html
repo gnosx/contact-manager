@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacts</title>
+    <title>Contacts Page</title>
+    <link rel="stylesheet" href="generalS.css">
 </head>
 <body>
-    <header>This is still a test page!</header>
+    <div id="welcome-message"></div>
+    <header>
+        <header>
+            <div class="left-section">
+                <p>Welcome to My Website!</p>
+            </div>
+            <div class="right-section">
+                <p><a href="index.html">Login</a></p>
+            </div>
+    </header>
+
+    <script>
+        // Retrieve user information from localStorage
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        
+        // Display welcome message if user is logged in
+        if (loggedInUser) {
+            document.getElementById('welcome-message').textContent = `Welcome, ${loggedInUser}!`;
+        } else {
+            document.getElementById('welcome-message').textContent = 'You are not logged in.';
+        }
+    </script>
 </body>
 </html>

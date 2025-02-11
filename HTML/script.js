@@ -1,8 +1,8 @@
 // script.js
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
-
-    // Get form values
+    window.location.href = 'contacts.html';
+    /*// Get form values
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
@@ -19,6 +19,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         if (data.success) {
             document.getElementById('message').textContent = 'Login successful!';
             document.getElementById('message').style.color = 'green';
+            localStorage.setItem('loggedInUser', username);
             window.location.href = 'contacts.html';
         } else {
             document.getElementById('message').textContent = 'Invalid username or password.';
@@ -27,5 +28,5 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     })
     .catch(error => {
         console.error('Error:', error);
-    });
+    });*/
 });
