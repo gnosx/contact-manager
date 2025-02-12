@@ -3,7 +3,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 0rem;
     background-color: #4CAF50;
     color: white;
     border-bottom: 2px solid #388E3C;
@@ -11,7 +11,17 @@ header {
 
 h1 {
     font-family: Arial, sans-serif;
-    font-size: 125%;
+    font-size: 130%;
+    background-color: #4CAF50;
+    color: white;
+    width: 100%;
+    height: 2rem;
+    padding-top: 0.6rem;
+    padding-left: 0.5rem;
+    margin-top: 0rem;
+    border-top: 2px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .container {
@@ -28,23 +38,56 @@ h1 {
     background-color: white;
     padding: 1rem;
     border-radius: 8px;
-    width: 300px;
+    width: 60%;
     line-height: 22px;
     text-align: left;
     margin-top: 0rem;
     padding-top: 0rem;
 }
 
+.box {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 2rem;
+    margin-top: 0rem;
+    width: 60% - 4rem;
+}
+
+.search {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 2rem;
+    width: 60%;
+}
+
+.box-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    margin: -20px -20px 20px -20px;
+}
+
+.box-content {
+    margin: -20px;
+    padding-left: 0rem;
+}
+
 .left-section {
-    font-size: 125%;
-    font-weight: 750;
-    margin-left: 1rem;
+    font-size: 150%;
+    font-weight: 800;
+    margin-left: 2rem;
 }
 
 .left-section-center {
-    margin-left: 1rem;
+    margin-left: 2rem;
     background-color: white;
     display: flex;
+    flex-direction: column;
     border: 2px solid #4CAF50;
     border-radius: 8px;
     padding: 1rem;
@@ -58,12 +101,13 @@ h1 {
 
 .right-section-center {
     display: flex;
-    margin-right: 1rem;
+    margin-right: 2%;
+    margin-top: 0rem;
     background-color: white;
     border: 2px solid #4CAF50;
     border-radius: 8px;
-    padding: 1rem;
-    width: 32%;
+    padding: 0rem;
+    width: 33%;
 }
 
 #username-display {
@@ -93,6 +137,20 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+ol {
+    padding: 0;
+    margin-top: 0rem;
+    margin-left: 0rem;
+}
+
+li {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 a {
