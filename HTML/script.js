@@ -1,4 +1,9 @@
 // script.js
+document.addEventListener('create', function(event) {
+    event.preventDefault();
+    window.location.href = 'create.html';
+});
+
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
     window.location.href = 'contacts.html';
