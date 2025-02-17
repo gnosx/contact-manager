@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts Page</title>
+    <link rel="stylesheet" href="generalS.css">
+</head>
+<body>
+    <!--<script>
+        // Retrieve user information from localStorage
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        
+        // Display welcome message if user is logged in
+        if (loggedInUser) {
+            document.getElementById('welcome-message').textContent = `Welcome, ${loggedInUser}!`;
+        } else {
+            document.getElementById('welcome-message').textContent = 'You are not logged in.';
+        }
+    </script>-->
+    <div id="welcome-message"></div>
+    <header>
+            <div class="left-section">
+                <p>Contact Manager</p>
+            </div>
+            <div class="right-section">
+                <p id="username-display"></p>
+                <p><a href="index.html" id="login-link">Login</a></p>
+            </div>
+    </header>
+    <div class="container">
+        <div class="left-section-center">
+            <div style="display: flex;">
+                <div class="search-container">
+                    <form id="search-form">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name">
+                        <label for="number">Phone Number:</label>
+                        <input type="phone" id="phone" name="phone">
+                        <label for="email">email:</label>
+                        <input type="email" id="email" name="email">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="left-section-center">
+                    <div>
+                        Current editing profile
+                    </div>
+                </div>
+            </div>
+            <div class="box" style="margin: 1rem;">
+                <h2 class="box-header">Search:</h2>
+                <div class="box-content">
+                    <ol>
+                        <li>test1</li>
+                        <li>test2</li>
+                        <li>test3</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="box" style="width: 30%; margin-left: 1%;">
+            <h2 class="box-header">Contacts:</h2>
+            <div class="box-content">
+                <ol>
+                    <li>testC1</li>
+                    <li>test2</li>
+                    <li>test3</li>
+                </ol>
+            </div>
+        </div>
+        <!--<div class="right-section-center">
+            <h1 class="contact-header">Contacts:</h1>
+            <p>All know profiles</p>
+        </div>-->
+    </div>
+    <!--<div class="container">
+        <div class="left-section-center" style="width: 62%;padding: 0rem; display: block;">
+            <h1 style="width: 99.4%;">Search:</h1>
+            <lo id="contact-list">
+                <li>test1</li>
+                <li>test2</li>
+                <li>test3</li>
+                <li>All profiles that follow the current search algorithm</li> 
+            </lo>
+        </div>
+    </div>-->
+    <script src="contactJ.js"></script>
+</body>
+</html>
