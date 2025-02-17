@@ -22,15 +22,13 @@
         <div class="login-container">
             <h1>Login</h1>
             <form id="login-form">
-                <label for="username">Username:</label>
-                <!--Removed require for testing-->
-                <input type="text" id="username" name="username" required>
-                <label for="password">Password:</label>
-                <!--Removed require for testing-->
-                <input type="password" id="password" name="password" required>
-                <button type="submit">Login</button>
+                <label for="loginName">Username:</label>
+                <input type="text" id="loginName" name="username" required>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="password" required>
+                <button type="button" id="loginButton" onclick="doLogin()">Login</button> <!-- Added onclick -->
             </form>
-            <p id="message"></p>
+            <p id="loginResult"></p>
         </div>
     </div>
     <script src="script.js"></script>
