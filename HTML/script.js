@@ -10,7 +10,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     const password = document.getElementById('password').value;
 
     // Send data to the server
-    fetch('http://your-php-server-url/login.php', { // Update URL to match your PHP endpoint
+    fetch('http://contact.youneedtodo.xyz/login.php', { // Update URL to match your PHP endpoint
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
