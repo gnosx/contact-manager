@@ -10,7 +10,6 @@ let userId = 0;
 
 function doLogin()
 {
-	console.log("doing login");
 	userId = 0;
 	
 	let login = document.getElementById("loginName").value;
@@ -40,7 +39,6 @@ function doLogin()
 	// success
 	.then(data => {
 		if (data.error === "") {
-			alert("Login successful! User ID: " + data.id);
 			window.location.href = "contacts.html";
 		} else {
 			alert("Error: " + data.error);
@@ -51,6 +49,45 @@ function doLogin()
 		console.error("Error:", error);
 		alert("Login failed: " + error.message); // Show user feedback
 	});
+}
 
-	console.log(jsonPayload);
+function doSignup()
+{
+	userId = 0;
+	
+	let userName = document.getElementById("userName").value;
+	let userPass = document.getElementById("userPass").value;
+
+	// change "login" and "password" to match php
+	let tmp = {login:userName,password:userPass};
+	let jsonPayload = JSON.stringify( tmp );
+	
+	let url = urlBase + '/Create.' + extension;
+
+	fetch(url, {
+		method: "POST",
+		body: jsonPayload,
+		headers: { "Content-Type": "application/json" }
+	})
+	// request err
+	.then(response => {
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+		return response.json();
+	})
+	// success
+	.then(data => {
+		if (data.error === "") {
+			alert("Account Created!");
+			window.location.href = "index.html";
+		} else {
+			alert("Error: " + data.error);
+		}
+	})
+	// generic error
+	.catch(error => {
+		console.error("Error:", error);
+		alert("Login failed: " + error.message); // Show user feedback
+	});
 }
