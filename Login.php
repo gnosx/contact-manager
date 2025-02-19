@@ -5,7 +5,7 @@
 	
 	$id = 0;
 
-	$conn = new mysqli("34.205.154.206", "Group4", "fouristhebest", "ContactMan");	
+	$conn = new mysqli("localhost", "Group4", "fouristhebest", "ContactMan");	
 	if( $conn->connect_error )
 	{
 		returnWithError( $conn->connect_error );
