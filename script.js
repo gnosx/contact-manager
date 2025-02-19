@@ -1,8 +1,3 @@
-document.getElementById('create').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.location.href = 'create.html';
-});
-
 const urlBase = 'http://contact.youneedtodo.xyz';
 const extension = 'php';
 
