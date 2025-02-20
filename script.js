@@ -50,12 +50,13 @@ function doSignup()
 {
 	userId = 0;
 	
-	let userName = document.getElementById("userName").value;
-	let userPass = document.getElementById("userPass").value;
+	let userName = document.getElementById("firstName").value;
+	let userPass = document.getElementById("lastName").value;
+	let firstName = document.getElementById("firstName").value;
+	let lastName = document.getElementById("lastName").value;
 
-	// change "login" and "password" to match php
-	let tmp = {login:userName,password:userPass};
-	let jsonPayload = JSON.stringify( tmp );
+	let tmp = {firstName:firstName, lastName:lastName, login:userName,password:userPass};	// change "login" and "password" to match php
+	let jsonPayload = JSON.stringify(tmp);
 	
 	let url = urlBase + '/Create.' + extension;
 
