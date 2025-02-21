@@ -50,12 +50,14 @@ function doSignup()
 {
 	userId = 0;
 	
+	let firstName = document.getElementById("firstName").value;
+	let lastName = document.getElementById("lastName").value;
 	let userName = document.getElementById("userName").value;
 	let userPass = document.getElementById("userPass").value;
 
-	// change "login" and "password" to match php
-	let tmp = {login:userName,password:userPass};
-	let jsonPayload = JSON.stringify( tmp );
+	// Include all fields to match PHP expectations
+	let tmp = { firstName: firstName, lastName: lastName, login: userName, password: userPass };
+	let jsonPayload = JSON.stringify(tmp);
 	
 	let url = urlBase + '/Create.' + extension;
 
@@ -64,14 +66,12 @@ function doSignup()
 		body: jsonPayload,
 		headers: { "Content-Type": "application/json" }
 	})
-	// request err
 	.then(response => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
 		return response.json();
 	})
-	// success
 	.then(data => {
 		if (data.error === "") {
 			alert("Account Created!");
@@ -80,9 +80,8 @@ function doSignup()
 			alert("Error: " + data.error);
 		}
 	})
-	// generic error
 	.catch(error => {
 		console.error("Error:", error);
-		alert("Login failed: " + error.message); // Show user feedback
+		alert("Sign up failed: " + error.message);
 	});
 }

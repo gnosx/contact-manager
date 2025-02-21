@@ -27,12 +27,12 @@
                         <input type="text" id="lastName">
 
                         <label>Create Username:</label>
-                        <input type="text" id="userName">
+                        <input type="text" id="userName" name="login">
 
                         <label>Password:</label>
-                        <input type="password" id="userPass">
+                        <input type="password" id="userPass" name="password">
 
-                        <button type="submit" onclick="doSignup()">Create</button>
+                        <button type="submit" onclick="event.preventDefault(); doSignup();">Create</button>
                     </form>
                 </div>
             </div>
