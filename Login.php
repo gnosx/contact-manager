@@ -6,7 +6,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $inData = json_decode(file_get_contents("php://input"), true);
 
-$conn = new mysqli("localhost", "your_db_user", "your_db_password", "your_db_name");
+$conn = new mysqli("localhost", "Group4", "fouristhebest", "ContactMan");
 
 if ($conn->connect_error) {
     die(json_encode(["error" => "Database connection failed: " . $conn->connect_error]));
