@@ -1,69 +1,12 @@
-
 <?php
+session_start(); // Start session
 
-	$inData = getRequestInfo();
-	
-	$id = 0;
-
-	$conn = new mysqli("localhost", "Group4", "fouristhebest", "ContactMan");	
-	if( $conn->connect_error )
-	{
-		returnWithError( $conn->connect_error );
-	}
-	else
-	{
-		$stmt = $conn->prepare("SELECT ID FROM Users WHERE Login=? AND Password=?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
-		$stmt->execute();
-		$result = $stmt->get_result();
-
-		if( $row = $result->fetch_assoc()  )
-		{
-			returnWithInfo( $row['ID'] );
-		}
-		else
-		{
-			returnWithError("No Records Found");
-		}
-
-		$stmt->close();
-		$conn->close();
-	}
-	
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
-	}
-
-	function sendResultInfoAsJson( $obj ) 
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
-	
-	function returnWithError( $err )
-	{
-		$retValue = '{"id":0,"error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
-	function returnWithInfo( $id )
-	{
-		$retValue = '{"id":' . $id . ',"error":""}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
-?>
-
-<?php
-session_start();
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
 
 $inData = json_decode(file_get_contents("php://input"), true);
-$conn = new mysqli("localhost", "Group4", "fouristhebest", "ContactMan");
+
+$conn = new mysqli("localhost", "your_db_user", "your_db_password", "your_db_name");
 
 if ($conn->connect_error) {
     die(json_encode(["error" => "Database connection failed: " . $conn->connect_error]));
@@ -80,17 +23,9 @@ $result = $stmt->get_result();
 
 if ($row = $result->fetch_assoc()) {
     if (password_verify($password, $row["password"])) {
-        //store user session
-        $_SESSION["user_id"] = $row["id"];
-        $_SESSION["first_name"] = $row["firstName"];
-        $_SESSION["last_name"] = $row["lastName"];
+        $_SESSION["user_id"] = $row["id"]; // Store user session
 
-        echo json_encode([
-            "id" => $row["id"],
-            "firstName" => $row["firstName"],
-            "lastName" => $row["lastName"],
-            "message" => "Login successful"
-        ]);
+        echo json_encode(["id" => $row["id"], "message" => "Login successful"]);
     } else {
         echo json_encode(["error" => "Invalid password"]);
     }
@@ -100,4 +35,3 @@ if ($row = $result->fetch_assoc()) {
 
 $conn->close();
 ?>
-
