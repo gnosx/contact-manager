@@ -1,64 +1,24 @@
-document.addEventListener("DOMContentLoaded", function () {
-    checkSession(); // Verify if user is logged in
-    loadContacts(); // Load contacts on page load
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Retrieve user information from localStorage
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    
+    // Display username if user is logged in
+    if (loggedInUser) {
+        document.getElementById('username-display').textContent = `Hello, ${loggedInUser}`;
+        document.getElementById('login-link').style.display = 'none'; // Hide login link if user is logged in
+    }
 });
 
-// ✅ Check if a user session exists
-function checkSession() {
-    fetch("https://yourdomain.com/LAMPAPI/CheckSession.php")
-        .then(response => response.json())
-        .then(data => {
-            if (data.loggedIn) {
-                document.getElementById("username-display").textContent = `Hello, ${data.firstName}`;
-                document.getElementById("login-link").style.display = "none"; // Hide login link
-            } else {
-                window.location.href = "index.html"; // Redirect to login if no session exists
-            }
-        })
-        .catch(error => console.error("Session check failed:", error));
-}
+document.getElementById('login-form')?.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting the traditional way
 
-// ✅ Fetch and Display Contacts for Logged-in User
-function loadContacts() {
-    fetch("https://yourdomain.com/LAMPAPI/GetContacts.php")
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert("Error: " + data.error);
-            } else {
-                displayContacts(data);
-            }
-        })
-        .catch(error => console.error("Failed to load contacts:", error));
-}
+    // Directly redirect to contacts.html for testing
+    const username = document.getElementById('username').value;
 
-// ✅ Display Contacts in HTML
-function displayContacts(contacts) {
-    let contactList = document.getElementById("contact-list");
-    contactList.innerHTML = ""; // Clear existing contacts
+    // Save user information in localStorage
+    localStorage.setItem('loggedInUser', username);
 
-    contacts.forEach(contact => {
-        let contactItem = document.createElement("li");
-        contactItem.textContent = `${contact.name} - ${contact.email}`;
-        contactList.appendChild(contactItem);
-    });
-}
-
-// ✅ Logout Function: Clears Session and Redirects to Login
-document.addEventListener("DOMContentLoaded", function () {
-    const logoutButton = document.getElementById("logout-link");
-
-    if (logoutButton) {
-        logoutButton.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            fetch("https://yourdomain.com/LAMPAPI/Logout.php")
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Logout successful:", data);
-                    window.location.href = "index.html"; // Redirect to login page
-                })
-                .catch(error => console.error("Logout failed:", error));
-        });
-    }
+    // Redirect to contacts.html
+    window.location.href = 'contacts.html'; // Change 'contacts.html' to your desired page
 });
