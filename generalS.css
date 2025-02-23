@@ -1,12 +1,16 @@
-/* styles.css */
 header {
+    background-color: black;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0rem;
-    background-color: #4CAF50;
+    padding: 0.25rem;
+    height: 3rem;
     color: white;
-    border-bottom: 2px solid #388E3C;
+    text-align: center;
+}
+
+img {
+    height: 3rem;
 }
 
 h1 {
@@ -25,14 +29,25 @@ h1 {
 }
 
 h2 {
+    font-family: Arial, sans-serif;
     font-size: 150%;
+    background-color: #fc0;
+    color: black;
+    width: 100%;
+    min-height: 2rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.1rem;
+    margin-top: 0rem;
+    border-top: 2px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 .container {
     font-family: Arial, sans-serif;
     background-color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     height: 100%;
     margin: 0;
     margin-top: 1rem;
@@ -51,15 +66,16 @@ h2 {
 }
 
 .account-create-container {
-    margin-left: auto;
-    margin-right: auto;
     background-color: white;
-    display:flex;
-    flex-direction: column;
-    border: 2px solid #4CAF50;
     border-radius: 8px;
-    padding: 2rem;
-    width: 40%;
+    border: 1px solid #ccc;
+    justify-items: center;
+    width: 25%;
+    height: 100%;
+    padding-bottom: 1rem;
+    text-align: center;
+    margin-right: 20px; 
+    line-height: 25px;
 }
 
 .box {
@@ -107,7 +123,7 @@ h2 {
     background-color: white;
     display: flex;
     flex-direction: column;
-    border: 2px solid #4CAF50;
+    border: 1px solid #ccc;
     border-radius: 8px;
     padding: 1rem;
     width: 60%;
@@ -148,14 +164,19 @@ input {
 }
 
 button {
-    margin-top: 1rem;
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+    margin-top: 15px; /* Adjusted margin to decrease space */
+    width: 75%;
+    padding: 0.25rem;
+    background-color: #FCF0DA to #FAE6BF;
+    background: linear-gradient(0deg, #FCF0DA, #FAE6BF);
+    color: black;
+    border: 2px solid #EACCAE;
     border-radius: 4px;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: #a8a8a8;
 }
 
 ol {
