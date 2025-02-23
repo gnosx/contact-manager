@@ -11,6 +11,7 @@
     if( $conn->connect_error )
     {
         returnWithError( $conn->connect_error );
+        exit();
     }
     else
     {
@@ -23,6 +24,9 @@
         if ($result->num_rows > 0)
         {
             returnWithError("Username already taken");
+            $stmt->close();
+            $conn->close();
+            exit();
         }
         else
         {
