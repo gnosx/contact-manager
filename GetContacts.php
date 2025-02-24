@@ -8,7 +8,7 @@ if (!isset($_SESSION["user_id"])) {
     die(json_encode(["error" => "Unauthorized access"]));
 }
 
-$conn = new mysqli("34.205.154.206", "Group4", "fouristhebest", "ContactMan");
+$conn = new mysqli("localhost", "Group4", "fouristhebest", "ContactMan");
 
 if ($conn->connect_error) {
     die(json_encode(["error" => "Database connection failed: " . $conn->connect_error]));
