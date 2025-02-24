@@ -1,24 +1,42 @@
-// script.js
-document.addEventListener('DOMContentLoaded', function() {
-    // Retrieve user information from localStorage
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    
-    // Display username if user is logged in
-    if (loggedInUser) {
-        document.getElementById('username-display').textContent = `Hello, ${loggedInUser}`;
-        document.getElementById('login-link').style.display = 'none'; // Hide login link if user is logged in
+function loadContacts() {
+    fetch("https://yourdomain.com/LAMPAPI/GetContacts.php")
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert("Error: " + data.error);
+            } else {
+                displayContacts(data);
+            }
+        })
+        .catch(error => console.error("Failed to load contacts:", error));
+}
+
+//display Contacts in HTML
+function displayContacts(contacts) {
+    let contactList = document.getElementById("contact-list");
+    contactList.innerHTML = ""; //clear existing contacts
+
+    contacts.forEach(contact => {
+        let contactItem = document.createElement("li");
+        contactItem.textContent = `${contact.name} - ${contact.email}`;
+        contactList.appendChild(contactItem);
+    });
+}
+
+//logout function
+document.addEventListener("DOMContentLoaded", function () {
+    const logoutButton = document.getElementById("logout-link");
+
+    if (logoutButton) {
+        logoutButton.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            fetch("https://yourdomain.com/LAMPAPI/Logout.php")
+                .then(response => response.json())
+                .then(() => {
+                    window.location.href = "index.html"; //redirect to login page
+                })
+                .catch(error => console.error("Logout failed:", error));
+        });
     }
-});
-
-document.getElementById('login-form')?.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting the traditional way
-
-    // Directly redirect to contacts.html for testing
-    const username = document.getElementById('username').value;
-
-    // Save user information in localStorage
-    localStorage.setItem('loggedInUser', username);
-
-    // Redirect to contacts.html
-    window.location.href = 'contacts.html'; // Change 'contacts.html' to your desired page
 });
