@@ -20,14 +20,6 @@
         </div>
     </header>
     <div class="container">
-        <div class="left-text">
-            <h2>Create an account</h2>
-            <p>Create a contact manager account. You will need the following to create an account:</p>
-            <p>-Name</p>
-            <p>-Phone Number</p>
-            <p>-eMail</p>
-            <button onclick="location.href='create.html'" id="create">Create an Account</button>
-        </div>
         <div class="login-container">
             <h2>Login</h2>
             <form id="login-form">
@@ -35,7 +27,9 @@
                 <input type="text" id="loginName" name="username" required>
                 <label for="loginPassword">Password:</label>
                 <input type="password" id="loginPassword" name="password" required>
-                <button type="button" id="loginButton" onclick="doLogin()">Login</button> <!-- Added onclick -->
+                <button type="button" id="loginButton" onclick="doLogin()">Login</button>
+                <p></p>
+                <button onclick="location.href='create.html'" id="create">Create Account</button>
             </form>
             <p id="loginResult"></p>
         </div>
