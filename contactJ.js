@@ -11,10 +11,10 @@ function loadContacts() {
         .catch(error => console.error("Failed to load contacts:", error));
 }
 
-// ✅ Display Contacts in HTML
+//display Contacts in HTML
 function displayContacts(contacts) {
     let contactList = document.getElementById("contact-list");
-    contactList.innerHTML = ""; // Clear existing contacts
+    contactList.innerHTML = ""; //clear existing contacts
 
     contacts.forEach(contact => {
         let contactItem = document.createElement("li");
@@ -23,7 +23,7 @@ function displayContacts(contacts) {
     });
 }
 
-// ✅ Logout Function
+//logout function
 document.addEventListener("DOMContentLoaded", function () {
     const logoutButton = document.getElementById("logout-link");
 
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             fetch("https://yourdomain.com/LAMPAPI/Logout.php")
                 .then(response => response.json())
                 .then(() => {
-                    window.location.href = "index.html"; // Redirect to login page
+                    window.location.href = "index.html"; //redirect to login page
                 })
                 .catch(error => console.error("Logout failed:", error));
         });
