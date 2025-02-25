@@ -67,14 +67,19 @@ h2 {
 }
 
 .search-container {
-    background-color: white;
-    padding: 1rem;
     border-radius: 8px;
     width: 60%;
     line-height: 22px;
     text-align: left;
     margin-top: 0rem;
+    padding: 1rem;
     padding-top: 0rem;
+}
+
+#search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .account-create-container {
@@ -98,7 +103,7 @@ h2 {
     padding: 20px;
     padding-bottom: 0.5rem;
     margin: 2rem;
-    margin-top: 0rem;
+    margin-top: 1rem;
     width: 60% - 4rem;
     height: 100%;
 }
@@ -138,7 +143,7 @@ h2 {
     flex-direction: column;
     border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 1rem;
+    padding: 2rem;
     width: 60%;
 }
 
