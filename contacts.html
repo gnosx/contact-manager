@@ -21,7 +21,7 @@
     <div id="welcome-message"></div>
     <header>
         <div class="left-section">
-            <div class="container" style="background-color: black;">
+            <div class="container-header" style="background-color: black;">
                 <div class="left-section" style="height: 3rem; margin-left: -2rem; margin-top: 1rem;">
                     <img src="Contact Logo.jpg" href="generalS.css">
                 </div>
@@ -37,29 +37,43 @@
     </header>
      <div class="container">
         <div class="left-section-center">
-            <h2 style="margin: -1rem; margin-bottom: 0rem; padding-left: 1rem; padding-right: 1rem;">Search:</h2>
+            <h2 class="label-search" style="margin: -1rem; margin-bottom: 0rem; padding-left: 1rem; padding-right: 1rem; display:flex;">
+                Contacts List
+                <div class="right-section" style="justify-content:right;">
+                    <button style="width: 50%;">Add</button>
+                    <button style="width: 70%;">Remove</button>       
+                </div>
+            </h2>
             <div class="container">
                 <div class="search-container">
-                    <form id="search-form">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name">
-                        <label for="number">Phone:</label>
-                        <input type="phone" id="phone" name="phone">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email">
-                        <div class="container" style="margin: 0rem;">
-                            <button type="submit">Search</button>
-                        </div>
-                    </form>
+                    <p></p>
                 </div>
             </div>
             <div class="box" style="margin: 1rem; margin-top: -1.5rem;">
-                <div class="box-content">
-                    <ol>
-                        <li>test1</li>
-                        <li>test2</li>
-                        <li>test3</li>
-                    </ol>
+                <div>
+                    <div style="display: flexbox;">
+                        <label style="display: flex;">
+                            Search:
+                            <input style="width: 80%; margin-left: 0.5rem; margin-bottom: 0.5rem;" type="text" name="search-contact" id="searching" placeholder="Enter name, phone, or email...">
+                        </label>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Name:</th>
+                            <th>Phone:</th>
+                            <th>Email:</th>
+                        </tr>
+                        <tr>
+                            <td>Matthew Gerber</td>
+                            <td>123-456-7890</td>
+                            <td>yessir123@email.com</td>
+                        </tr>
+                        <tr>
+                            <td>We Are Cooked</td>
+                            <td>999-999-9999</td>
+                            <td>praying@email.com</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
