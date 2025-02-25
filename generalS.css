@@ -197,7 +197,7 @@ label {
 }
 
 input {
-    width: 70%;
+    width: 100%;
     padding: 0.25rem;
     margin-bottom: 1rem;
     border: 1px solid #ccc;
@@ -264,4 +264,33 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    padding: 0rem;
+    background-color: white;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 500;
+}
+
+label {
+    margin-top: -0.5rem;
 }

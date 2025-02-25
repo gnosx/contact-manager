@@ -38,12 +38,41 @@
      <div class="container">
         <div class="left-section-center">
             <h2 class="label-search" style="margin: -1rem; margin-bottom: 0rem; padding-left: 1rem; padding-right: 1rem; display:flex;">
-                Contacts List
-                <div class="right-section" style="justify-content:right;">
-                    <button style="width: 50%;">Add</button>
-                    <button style="width: 70%;">Remove</button>       
+                <div style="align-content: left; width: 50%;">
+                    Contacts List
+                </div>
+                <div class="right-section" style="justify-content:right; width: 50%; margin-bottom: 0.5rem; gap: 1rem;">
+                    <button onclick="openPopup()" style="width: 30%;">Add</button>
+                    <button style="width: 30%;">Remove</button>       
                 </div>
             </h2>
+            <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+            <!-- Pop-up container -->
+            <div class="popup-container" id="popupContainer">
+                <h2>
+                    <div style="align-content: left; width: 50%; padding-left: 0.5rem">
+                        Add Contact
+                    </div>
+                </h2>
+                <div class="container" style="display=flex; flex-direction: column; margin-top: -1rem;">
+                    <form id="add-form" style="width: 80%; padding: 1rem;">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                        <label for="lastName">Last Name:</label>
+                        <input type="lastName" id="lastName" name="lastName" required>
+                        <label for="phoneNumber">Phone Number:</label>
+                        <input type="phoneNumber" id="phoneNumber" name="phoneNumber" required>
+                        <label for="email">email:</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="container" style="display: flex; flex-direction: column; margin-top: -0.5rem; margin-bottom: 0rem; margin-left: -1rem; width: 100%; padding-right: 1rem; gap: 0.5rem;">
+                            <button onclick="location.href=''" id="add">Add Contact</button>
+                            <button class="button" onclick="closePopup()">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
             <div class="container">
                 <div class="search-container">
                     <p></p>

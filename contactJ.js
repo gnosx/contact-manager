@@ -22,3 +22,15 @@ document.getElementById('login-form')?.addEventListener('submit', function(event
     // Redirect to contacts.html
     window.location.href = 'contacts.html'; // Change 'contacts.html' to your desired page
 });
+
+  // Function to open the pop-up
+  function openPopup() {
+    document.getElementById('popupContainer').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+// Function to close the pop-up
+function closePopup() {
+    document.getElementById('popupContainer').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
