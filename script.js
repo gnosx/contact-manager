@@ -36,13 +36,13 @@ function doLogin()
 		if (data.error === "") {
 			window.location.href = "contacts.html";
 		} else {
-			alert("Error: " + data.error);
+			// alert("Error: " + data.error);
 		}
 	})
 	// generic error
 	.catch(error => {
 		console.error("Error:", error);
-		alert("Login failed: " + error.message); // Show user feedback
+		// alert("Login failed: " + error.message); // Show user feedback
 	});
 }
 
@@ -77,11 +77,10 @@ function doSignup()
 			alert("Account Created!");
 			window.location.href = "index.html";
 		} else {
-			alert("Error: " + data.error);
+			// alert("Error: " + data.error);
 		}
 	})
 	.catch(error => {
 		console.error("Error:", error);
-		alert("Sign up failed: " + error.message);
 	});
 }
