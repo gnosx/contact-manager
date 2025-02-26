@@ -74,7 +74,7 @@ function doSignup()
 	})
 	.then(data => {
 		if (data.error === "") {
-			alert("Account Created!");
+			// alert("Account Created!");
 			window.location.href = "index.html";
 		} else {
 			// alert("Error: " + data.error);
