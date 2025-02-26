@@ -2,11 +2,15 @@ const urlBase = 'http://contact.youneedtodo.xyz';
 const extension = 'php';
 
 let userId = 0;
+let firstName = "";
+let lastName = "";
 
 function doLogin()
 {
 	userId = 0;
-	
+	firstName = "";
+	lastName = "";
+
 	let login = document.getElementById("loginName").value;
 	let password = document.getElementById("loginPassword").value;
 //	var hash = md5( password );
@@ -34,6 +38,10 @@ function doLogin()
 	// success
 	.then(data => {
 		if (data.error === "") {
+			firstName = data.firstName;
+			lastName = data.lastName;
+			userId = data.userId;
+			saveCookie();
 			window.location.href = "contacts.html";
 		} else {
 			alert("Error: " + data.error);
@@ -84,4 +92,40 @@ function doSignup()
 		console.error("Error:", error);
 		alert("Sign up failed: " + error.message);
 	});
+}
+
+function saveCookie()
+{
+	let minutes = 20;
+	let date = new Date();
+	date.setTime(date.getTime()+(minutes*60*1000));	
+	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
+}
+
+function readCookie()
+{
+	userId = -1;
+	let data = document.cookie;
+	let splits = data.split(",");
+	for(var i = 0; i < splits.length; i++) 
+	{
+		let thisOne = splits[i].trim();
+		let tokens = thisOne.split("=");
+		if( tokens[0] == "firstName" )
+		{
+			firstName = tokens[1];
+		}
+		else if( tokens[0] == "lastName" )
+		{
+			lastName = tokens[1];
+		}
+		else if( tokens[0] == "userId" )
+		{
+			userId = parseInt( tokens[1].trim() );
+		}
+	}
+	
+	
+		document.getElementById("userName").innerHTML = "Logged in as " + userID + " " + lastName;
+
 }
