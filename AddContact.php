@@ -13,6 +13,7 @@
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
+        exit();
 	} 
     // TODO: check if contact already exists
 	else
@@ -21,12 +22,14 @@
         $stmt = $conn->prepare("INSERT INTO Contacts (UserID, FirstName, LastName, Phone, Email) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("issss", $userId, $firstName, $lastName, $phoneNumber, $email);
 
-        $stmt->execute
+        if ($stmt->execute()) {
+            returnWithInfo($conn->insert_id);
+        } else {
+            returnWithError("Error adding contact");
+        }
         
         $stmt->close();
         $conn->close();
-
-        returnWithError("");
 	}
 
 	function getRequestInfo()
@@ -40,10 +43,15 @@
 		echo $obj;
 	}
 	
-	function returnWithError( $err )
-	{
-		$retValue = '{"error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
-	
+    function returnWithError( $err )
+    {
+        $retValue = '{"id":0,"error":"' . $err . '"}';
+        sendResultInfoAsJson( $retValue );
+    }
+
+    function returnWithInfo( $id )
+    {
+        $retValue = '{"id":' . $id . ',"error":""}';
+        sendResultInfoAsJson( $retValue );
+    }
 ?>

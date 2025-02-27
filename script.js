@@ -196,10 +196,8 @@ function getContacts(searchTerm = "") {
 }
 
 
-function addContact(event)
+function addContact()
 {
-	event.preventDefault();
-
     let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
     let phoneNumber = document.getElementById("phoneNumber").value;
@@ -212,34 +210,29 @@ function addContact(event)
 
 	let url = urlBase + '/AddContact.' + extension;
 	
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				let jsonObject = JSON.parse(xhr.responseText);
-                if (jsonObject.error && jsonObject.error !== "") 
-                {		
-                    alert("Error: " + jsonObject.error);
-                    return;
-                }
-
-                alert("Contact Added Successfully");
-                closePopup();
-                location.reload();
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		alert("Failed to add contact: " + err.message);
-	}
-	
+	fetch(url, {
+		method: "POST",
+		body: jsonPayload,
+		headers: { "Content-Type": "application/json" }
+	})
+	.then(response => {
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+		return response.json();
+	})
+	.then(data => {
+		if (data.error === "") {
+			alert("Contact Added!");
+			window.location.href = "contacts.html";
+		} else {
+			alert("Error: " + data.error);
+		}
+	})
+	.catch(error => {
+		console.error("Error:", error);
+		alert("Contact creation failed: " + error.message);
+	});
 }
 
 function searchContact() {
