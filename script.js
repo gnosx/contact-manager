@@ -229,7 +229,7 @@ function searchContact() {
     let srch = document.getElementById("searchText").value;
     document.getElementById("contactSearchResult").innerHTML = "";
     
-    let contactList = "";
+    let contactList = "<div>TestList</div>";
 
     let tmp = { search: srch, userId: userId };
     let jsonPayload = JSON.stringify(tmp);
@@ -240,21 +240,30 @@ function searchContact() {
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
+		contactList += "<div>TestList</div1>";
         xhr.onreadystatechange = function() {
+			contactList += "<div>TestList2</div1>";
             if (this.readyState == 4 && this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
+				contactList += "<div>TestList3</div1>";
                 
                 for (let i = 0; i < jsonObject.results.length; i++) {
+					contactList += "<div>TestList4</div1>";
                     contactList += "<tr><th>" + jsonObject.results[i].FirstName + " " + jsonObject.results[i].LastName + "</th><th>" +
                         jsonObject.results[i].Phone + "</th><th>" +
                         jsonObject.results[i].Email + "</th></tr>";
                 }
+				contactList += "<div>TestList5</div1>";
                 
                 document.getElementById("contactSearchResult").innerHTML = contactList;
             }
+			contactList += "<div>TestList6</div1>";
         };
+		contactList += "<div>TestList7</div1>";
         xhr.send(jsonPayload);
     } catch (err) {
+		contactList += "<div>TestList8</div1>";
         document.getElementById("contactSearchResult").innerHTML = err.message;
     }
+	contactList += "<div>TestList9</div1>";
 }
