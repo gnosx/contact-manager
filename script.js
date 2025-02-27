@@ -41,7 +41,7 @@ function doLogin()
 			firstName = data.firstName;
 			lastName = data.lastName;
 			userId = data.userId;
-			saveCookie();
+			alert("Your Id is " + userId);
 			window.location.href = "contacts.html";
 		} else {
 			alert("Error: " + data.error);
@@ -126,6 +126,5 @@ function readCookie()
 	}
 	
 	
-		alert("Your Id is " + userId);
 
 }
