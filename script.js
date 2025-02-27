@@ -6,7 +6,7 @@ let firstName = "";
 let lastName = "";
 
 window.onload = function() {
-	let userId = getCookie("userId");
+	let userId = readCookie("userId");
 
 	// check if user is logged in
 	if(userId > 0) 
