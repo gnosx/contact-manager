@@ -241,12 +241,12 @@ function searchContact() {
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
     try {
-		contactList += "<div>TestList</div1>";
+		contactList += "<div>TestList1</div1>";
         xhr.onreadystatechange = function() {
 			contactList += "<div>TestList2</div1>";
             if (this.readyState == 4 && this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
-				contactList += "<div>TestList3</div1>";
+				contactList += "<div>TestList3 " + jsonObject.results[0].FirstName + "</div1>";
                 
                 for (let i = 0; i < jsonObject.results.length; i++) {
 					contactList += "<div>TestList4</div1>";
