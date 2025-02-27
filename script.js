@@ -158,6 +158,39 @@ function closePopup() {
     document.getElementById('overlay').style.display = 'none';
 }
 
+function getContacts(searchTerm = "") {
+    let userId = readCookie("userId");
+
+    let tmp = { userId: userId, search: searchTerm };
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/SearchContacts.php';  // URL pointing to your PHP script
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                let jsonObject = JSON.parse(xhr.responseText);
+                let contactList = "";
+
+                for (let i = 0; i < jsonObject.results.length; i++) {
+                    contactList += `<tr>
+                                        <td>${jsonObject.results[i].FirstName} ${jsonObject.results[i].LastName}</td>
+                                        <td>${jsonObject.results[i].Phone}</td>
+                                        <td>${jsonObject.results[i].Email}</td>
+                                     </tr>`;
+                }
+                document.getElementById("contactSearchResult").innerHTML = contactList;
+            }
+        };
+        xhr.send(jsonPayload);
+    } catch (err) {
+        document.getElementById("contactSearchResult").innerHTML = err.message;
+    }
+}
+
 
 function addContact()
 {
