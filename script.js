@@ -119,36 +119,23 @@ function saveCookie()
 	let minutes = 20;
 	let date = new Date();
 	date.setTime(date.getTime()+(minutes*60*1000));	
-	document.cookie = "firstName=" + firstName + "; expires=" + date.toGMTString();
-    document.cookie = "lastName=" + lastName + "; expires=" + date.toGMTString();
-    document.cookie = "userId=" + userId + "; expires=" + date.toGMTString();
+	document.cookie = `userId=${userId}; expires=${date.toGMTString()}; path=/`;
 }
 
 // TODO: user id saving as -1 for every contact added
 function readCookie()
 {
-	let userId = -1;
-	let data = document.cookie;
-	let splits = data.split(",");
+	let data = document.cookie.split(";");
 	for(var i = 0; i < splits.length; i++) 
 	{
-		let thisOne = splits[i].trim();
-		let tokens = thisOne.split("=");
-		if( tokens[0] == "firstName" )
+		let thisOne = cookies[i].trim().split("=");
+		if( thisOne[0] === "userId" )
 		{
-			firstName = tokens[1];
-		}
-		else if( tokens[0] == "lastName" )
-		{
-			lastName = tokens[1];
-		}
-		else if( tokens[0] == "userId" )
-		{
-			userId = parseInt( tokens[1].trim() );
+			return parseInt(parts[1]);
 		}
 	}
 
-	return userId;
+	return -1;
 }
 
 // Function to open the pop-up
@@ -203,7 +190,7 @@ function addContact()
     let lastName = document.getElementById("lastName").value;
     let phoneNumber = document.getElementById("phoneNumber").value;
     let email = document.getElementById("email").value;
-	let userId = readCookie("userId");
+	let userId = readCookie();
 
 	let tmp = { firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, email: email, userId: userId };
 	// console.log(tmp);
