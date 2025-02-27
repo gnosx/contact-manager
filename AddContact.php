@@ -20,7 +20,7 @@
 	{
         // insert contact
         $stmt = $conn->prepare("INSERT INTO Contacts (UserID, FirstName, LastName, Phone, Email) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("issss", $userId, $firstName, $lastName, $phoneNumber, $email);
+        $stmt->bind_param("sssss", $userId, $firstName, $lastName, $phoneNumber, $email);
 
         if ($stmt->execute()) {
             returnWithInfo($conn->insert_id);

@@ -47,7 +47,7 @@ function doLogin()
 			if (this.readyState == 4 && this.status == 200) 
 			{
 				let jsonObject = JSON.parse( xhr.responseText );
-				userId = jsonObject.id;
+				userId = jsonObject.ID;
 		
 				if( userId < 1 )
 				{		
@@ -55,14 +55,16 @@ function doLogin()
 					//document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 					return;
 				}
-		
-				firstName = jsonObject.firstName;
-				lastName = jsonObject.lastName;
-				alert("Your ID is " + userId + " " + firstName);
-
-				saveCookie();
+				else 
+				{
+					firstName = jsonObject.firstName;
+					lastName = jsonObject.lastName;
+					alert("Your ID is " + userId + " " + firstName);
 	
-				window.location.href = "contacts.html";
+					saveCookie();
+		
+					window.location.href = "contacts.html";
+				}
 			}
 		};
 		xhr.send(jsonPayload);
@@ -123,13 +125,13 @@ function saveCookie()
 }
 
 // TODO: user id saving as -1 for every contact added
-function readCookie()
+function readCookie(key)
 {
 	let data = document.cookie.split(";");
-	for(var i = 0; i < data.length; i++) 
+	for(let i = 0; i < data.length; i++) 
 	{
 		let thisOne = cookies[i].trim().split("=");
-		if( thisOne[0] === "userId" )
+		if( thisOne[0] === key )
 		{
 			// return userId
 			return parseInt(thisOne[1]);
@@ -191,8 +193,7 @@ function addContact()
     let lastName = document.getElementById("lastName").value;
     let phoneNumber = document.getElementById("phoneNumber").value;
     let email = document.getElementById("email").value;
-	let userId = readCookie();
-	console.log(userId);
+	let userId = readCookie("userId");
 
 	let tmp = { firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, email: email, userId: userId };
 	// console.log(tmp);
