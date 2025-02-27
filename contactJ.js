@@ -86,9 +86,9 @@ function searchContact() {
                 let jsonObject = JSON.parse(xhr.responseText);
                 
                 for (let i = 0; i < jsonObject.results.length; i++) {
-                    contactList += "<p>" + jsonObject.results[i].FirstName + " " + jsonObject.results[i].LastName + "<br>" +
-                        jsonObject.results[i].Phone + "<br>" +
-                        jsonObject.results[i].Email + "</p>";
+                    contactList += "<tr><th>" + jsonObject.results[i].FirstName + " " + jsonObject.results[i].LastName + "</th><th>" +
+                        jsonObject.results[i].Phone + "</th><th>" +
+                        jsonObject.results[i].Email + "</th></tr>";
                 }
                 
                 document.getElementById("contactSearchResult").innerHTML = contactList;
