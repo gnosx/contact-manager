@@ -1,6 +1,10 @@
 <?php
+	session_start();
 
-	$inData = getRequestInfo();
+	header("Access-Control-Allow-Origin: *");
+	header("Cotnent-Type: application/json; charset=UTF-8");
+
+	$inData = json_decode(file_get_contents('php://input'), true);
 	
 	$searchResults = "";
 	$searchCount = 0;
@@ -13,11 +17,10 @@
 	else
 	{
         // partial search
-		$stmt = $conn->prepare("SELECT FirstName, LastName, Email FROM Contacts
-                                WHERE (FirstName LIKE ? OR LastName LIKE ? OR Phone LIKE ? OR Email LIKE ? 
-                                AND UserID=?");
+		$stmt = $conn->prepare("SELECT FirstName, LastName, Phone, Email FROM Contacts WHERE (Phone LIKE ? OR FirstName LIKE ? OR LastName LIKE ? OR Email LIKE ?) AND UserID=?");
+
         $searchTerm = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ssss", $searchTerm, $searchTerm, $searchTerm, $searchTerm, $inData["userId"]);
+		$stmt->bind_param("ssssi", $searchTerm, $searchTerm, $searchTerm, $searchTerm, $inData["userId"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -29,12 +32,8 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '{"FirstName":"' . $row["FirstName"] . 
-            '","LastName":"' . $row["LastName"] . 
-            '","Phone":"' . $row["Phone"] . 
-            '","Email":"' . $row["Email"] . '"}';
+			$searchResults .= '{"Phone":"' . $row["Phone"] . '","FirstName":"' . $row["FirstName"] . '","LastName":"' . $row["LastName"] . '","Email":"' . $row["Email"] . '"}';
 		}
-		
 		if( $searchCount == 0 )
 		{
 			returnWithError( "No Records Found" );
@@ -68,6 +67,10 @@
 	function returnWithInfo( $searchResults )
 	{
         $retValue = '{"results":[' . $searchResults . '],"error":""}';
+        sendResultInfoAsJson( $retValue );
+	}
+	
+ . '],"error":""}';
         sendResultInfoAsJson( $retValue );
 	}
 	
