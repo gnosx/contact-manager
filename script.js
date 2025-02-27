@@ -246,7 +246,7 @@ function searchContact() {
 			contactList += "<div>TestList2</div1>";
             if (this.readyState == 4 && this.status == 200) {
                 let jsonObject = JSON.parse(xhr.responseText);
-				contactList += "<div>TestList3 " + jsonObject.results[0].FirstName + "</div1>";
+				contactList += "<div>TestList3 " + jsonObject.results[1].FirstName + "</div1>";
                 
                 for (let i = 0; i < jsonObject.results.length; i++) {
 					contactList += "<div>TestList4</div1>";
