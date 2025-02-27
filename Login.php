@@ -24,15 +24,34 @@ if ($row = $result->fetch_assoc()) {
     $_SESSION["user_id"] = $row["ID"]; //store user ID in session
     $_SESSION["username"] = $login;    //store username in session
 
-    echo json_encode([
-        "id" => $row["ID"],
-        "firstName" => $row["firstName"],
-        "lastName" => $row["lastName"],
-        "message" => "Login successful"
-    ]);
+    returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
 } else {
     echo json_encode(["error" => "Invalid login credentials"]);
 }
+
+function getRequestInfo()
+	{
+		return json_decode(file_get_contents('php://input'), true);
+	}
+
+	function sendResultInfoAsJson( $obj )
+	{
+		header('Content-type: application/json');
+		echo $obj;
+	}
+	
+	function returnWithError( $err )
+	{
+		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+		sendResultInfoAsJson( $retValue );
+	}
+	
+	function returnWithInfo( $firstName, $lastName, $id )
+	{
+		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+		sendResultInfoAsJson( $retValue );
+	}
+
 
 $conn->close();
 ?>
