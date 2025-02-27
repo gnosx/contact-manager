@@ -124,9 +124,10 @@ function saveCookie()
     document.cookie = "userId=" + userId + "; expires=" + date.toGMTString();
 }
 
+// TODO: user id saving as -1 for every contact added
 function readCookie()
 {
-	userId = -1;
+	let userId = -1;
 	let data = document.cookie;
 	let splits = data.split(",");
 	for(var i = 0; i < splits.length; i++) 
