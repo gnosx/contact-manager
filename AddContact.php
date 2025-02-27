@@ -4,8 +4,9 @@
     // create variables
 	$firstName = $inData["firstName"];
     $lastName = $inData["lastName"];
-    $login = $inData["login"];
-    $password = $inData["password"];
+    $phoneNumber = $inData["phoneNumber"];
+    $email = $inData["email"];
+    $userId = $inData["userId"];
 
     // create new connection
     $conn = new mysqli("localhost", "Group4", "fouristhebest", "ContactMan");    
@@ -13,29 +14,20 @@
 	{
 		returnWithError( $conn->connect_error );
 	} 
+    // TODO: check if contact already exists
 	else
 	{
-        // check if contact already exists
-        $stmt = $conn->prepare("SELECT ID FROM Contacts WHERE Login=?");
-        $stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows > 0)
+        // insert contact
+        $stmt = $conn->prepare("INSERT INTO Contacts (UserID, FirstName, LastName, Phone, Email) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("issss", $userId, $firstName, $lastName, $phoneNumber, $email);
+
+        if($stmt->execute())
         {
-            returnWithError("Contact already exists");
+            returnWithError("")
         }
         else
         {
-            // insert new contact
-            $stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
-            
-            if ($stmt->execute()) {
-                returnWithInfo($conn->insert_id);
-            } else {
-                returnWithError("Error inserting user");
-            }
+            returnWithError("Error adding contact: " . $stmt->error);
         }
         
         $stmt->close();
