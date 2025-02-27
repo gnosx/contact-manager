@@ -5,20 +5,20 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
-window.onload = function() {
-	let userId = readCookie("userId");
+// window.onload = function() {
+// 	let userId = readCookie("userId");
 
-	// check if user is logged in
-	if(userId > 0) 
-	{
-		getContacts(); 
-	}
-	// user not logged in 
-	else 
-	{
-		window.location.href = "index.html";
-	}
-};
+// 	// check if user is logged in
+// 	if(userId > 0) 
+// 	{
+// 		getContacts(); 
+// 	}
+// 	// user not logged in 
+// 	else 
+// 	{
+// 		window.location.href = "index.html";
+// 	}
+// };
 
 // listener for logging out
 document.getElementById('login-form')?.addEventListener('submit', function(event) {
@@ -76,8 +76,9 @@ function doLogin()
 				alert("Your ID is " + userId + " " + firstName);
 
 				saveCookie();
-	
+				
 				window.location.href = "contacts.html";
+				getContacts();
 			}
 		};
 		xhr.send(jsonPayload);
