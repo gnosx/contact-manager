@@ -126,6 +126,6 @@ function readCookie()
 	}
 	
 	
-		document.getElementById("userName").innerHTML = "Logged in as " + userID + " " + lastName;
+		alert("Your Id is " + userId);
 
 }
