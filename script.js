@@ -245,14 +245,14 @@ function searchContact() {
         xhr.onreadystatechange = function() {
 			contactList += "<div>TestList2</div1>";
             if (this.readyState == 4 && this.status == 200) {
-                let jsonObject = JSON.parse(xhr.responseText);
-				contactList += "<div>TestList3 " + jsonObject.results[1].FirstName + "</div1>";
+                let searchCount = JSON.parse(xhr.responseText);
+				contactList += "<div>TestList3 " + searchCount.results[1].FirstName + "</div1>";
                 
-                for (let i = 0; i < jsonObject.results.length; i++) {
+                for (let i = 0; i < searchCount.results.length; i++) {
 					contactList += "<div>TestList4</div1>";
-                    contactList += "<tr><th>" + jsonObject.results[i].FirstName + " " + jsonObject.results[i].LastName + "</th><th>" +
-                        jsonObject.results[i].Phone + "</th><th>" +
-                        jsonObject.results[i].Email + "</th></tr>";
+                    contactList += "<tr><th>" + searchCount.results[i].FirstName + " " + searchCount.results[i].LastName + "</th><th>" +
+                        searchCount.results[i].Phone + "</th><th>" +
+                        searchCount.results[i].Email + "</th></tr>";
                 }
 				contactList += "<div>TestList5</div1>";
                 
