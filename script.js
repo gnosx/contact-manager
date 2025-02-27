@@ -23,35 +23,41 @@ function doLogin()
 	
 	let url = urlBase + '/Login.' + extension;
 
-	fetch(url, {
-		method: "POST",
-		body: jsonPayload,
-		headers: { "Content-Type": "application/json" }
-	})
-	// request err
-	.then(response => {
-		if (!response.ok) {
-			throw new Error(`HTTP error! Status: ${response.status}`);
-		}
-		return response.json();
-	})
-	// success
-	.then(data => {
-		if (data.error === "") {
-			firstName = data.firstName;
-			lastName = data.lastName;
-			userId = data.userId;
-			alert("Your Id is " + userId);
-			window.location.href = "contacts.html";
-		} else {
-			alert("Error: " + data.error);
-		}
-	})
-	// generic error
-	.catch(error => {
-		console.error("Error:", error);
-		alert("Login failed: " + error.message); // Show user feedback
-	});
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				let jsonObject = JSON.parse( xhr.responseText );
+				userId = jsonObject.id;
+		
+				if( userId < 1 )
+				{		
+					alert("WRONG");
+					//document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+					return;
+				}
+		
+				firstName = jsonObject.firstName;
+				lastName = jsonObject.lastName;
+				alert("Your ID is " + userId + " " + firstName);
+
+				saveCookie();
+	
+				window.location.href = "contacts.html";
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+
 }
 
 function doSignup()
