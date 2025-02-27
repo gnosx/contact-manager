@@ -126,11 +126,12 @@ function saveCookie()
 function readCookie()
 {
 	let data = document.cookie.split(";");
-	for(var i = 0; i < splits.length; i++) 
+	for(var i = 0; i < data.length; i++) 
 	{
 		let thisOne = cookies[i].trim().split("=");
 		if( thisOne[0] === "userId" )
 		{
+			// return userId
 			return parseInt(parts[1]);
 		}
 	}
