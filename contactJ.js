@@ -84,7 +84,7 @@ function searchContact() {
     document.getElementById("contactSearchResult").innerHTML = "";
     
     let contactList = "";
-    let userId = getCookie("userId");
+    let userId = readCookie("userId");
 
     let tmp = { search: srch, userId: userId };
     let jsonPayload = JSON.stringify(tmp);
