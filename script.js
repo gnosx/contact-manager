@@ -196,8 +196,10 @@ function getContacts(searchTerm = "") {
 }
 
 
-function addContact()
+function addContact(event)
 {
+	event.preventDefault();
+
     let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
     let phoneNumber = document.getElementById("phoneNumber").value;
@@ -205,6 +207,7 @@ function addContact()
 	let userId = readCookie("userId");
 
 	let tmp = { firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, email: email, userId: userId };
+	console.log(tmp);
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
