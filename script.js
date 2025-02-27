@@ -126,7 +126,7 @@ function saveCookie()
 
 function readCookie()
 {
-	let userId = -1;
+	userId = -1;
 	let data = document.cookie;
 	let splits = data.split(",");
 	for(var i = 0; i < splits.length; i++) 
@@ -205,7 +205,7 @@ function addContact()
 	let userId = readCookie("userId");
 
 	let tmp = { firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, email: email, userId: userId };
-	console.log(tmp);
+	// console.log(tmp);
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
