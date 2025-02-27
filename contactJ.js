@@ -74,7 +74,7 @@ function addContact()
 	}
 	catch(err)
 	{
-		alert("Failed to add contact: " +err.message);
+		alert("Failed to add contact: " + err.message);
 	}
 	
 }
