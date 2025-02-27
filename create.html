@@ -28,16 +28,16 @@
                     <h2>Create Account</h2>
                     <form id="create">
                         <label>First Name:</label>
-                        <input type="text" id="firstName" style="width: 70%;">
+                        <input type="text" id="firstName" style="width: 70%;" required>
 
                         <label>Last Name:</label>
-                        <input type="text" id="lastName" style="width: 70%;">
+                        <input type="text" id="lastName" style="width: 70%;" required>
 
                         <label>Create Username:</label>
-                        <input type="text" id="userName" name="login" style="width: 70%;">
+                        <input type="text" id="userName" name="login" style="width: 70%;" required>
 
                         <label>Password:</label>
-                        <input type="password" id="userPass" name="password" style="width: 70%;">
+                        <input type="password" id="userPass" name="password" style="width: 70%;" required>
 
                         <button type="submit" onclick="event.preventDefault(); doSignup();">Finish</button>
                     </form>
