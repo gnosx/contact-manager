@@ -5,21 +5,6 @@ let userId = 0;
 let firstName = "";
 let lastName = "";
 
-window.onload = function() {
-	let userInfo = readCookie();
-
-	// check if user is logged in
-	if(userId.userId > 0) 
-	{
-		getContacts(); 
-	}
-	// user not logged in 
-	else 
-	{
-		window.location.href = "index.html";
-	}
-};
-
 // listener for logging out
 document.getElementById('login-form')?.addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from submitting the traditional way
@@ -76,7 +61,7 @@ function doLogin()
 				alert("Your ID is " + userId + " " + firstName);
 
 				saveCookie();
-				
+	
 				window.location.href = "contacts.html";
 			}
 		};
