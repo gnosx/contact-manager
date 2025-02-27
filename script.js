@@ -192,6 +192,7 @@ function addContact()
     let phoneNumber = document.getElementById("phoneNumber").value;
     let email = document.getElementById("email").value;
 	let userId = readCookie();
+	console.log(userId);
 
 	let tmp = { firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, email: email, userId: userId };
 	// console.log(tmp);
