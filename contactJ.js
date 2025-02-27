@@ -35,12 +35,16 @@ function closePopup() {
     document.getElementById('overlay').style.display = 'none';
 }
 
+
 function addContact()
 {
-	let newColor = document.getElementById("contactText").value;
-	document.getElementById("contactAddResult").innerHTML = "";
+    let firstName = document.getElementById("firstName").value;
+    let lastName = document.getElementById("lastName").value;
+    let phoneNumber = document.getElementById("phoneNumber").value;
+    let email = document.getElementById("email").value;
+	let userId = getCookie("userId");
 
-	let tmp = {contact:newContact,userId,userId};
+	let tmp = { firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, email: email, userId: userId };
 	let jsonPayload = JSON.stringify( tmp );
 
 	let url = urlBase + '/AddContact.' + extension;
@@ -54,48 +58,23 @@ function addContact()
 		{
 			if (this.readyState == 4 && this.status == 200) 
 			{
-				document.getElementById("contactAddResult").innerHTML = "Contact has been added";
+				let jsonObject = JSON.parse(xhr.responseText);
+                if (jsonObject.error && jsonObject.error !== "") 
+                {		
+                    alert("Error: " + jsonObject.error);
+                    return;
+                }
+
+                alert("Contact Added Successfully");
+                closePopup();
+                location.reload();
 			}
 		};
 		xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
-		document.getElementById("contactAddResult").innerHTML = err.message;
+		alert("Failed to add contact: " +err.message);
 	}
 	
-}
-
-function searchContact() {
-    let srch = document.getElementById("searchText").value;
-    document.getElementById("contactSearchResult").innerHTML = "";
-    
-    let contactList = "";
-
-    let tmp = { search: srch, userId: userId };
-    let jsonPayload = JSON.stringify(tmp);
-
-    let url = urlBase + '/SearchContact.' + extension;
-
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-    try {
-        xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                let jsonObject = JSON.parse(xhr.responseText);
-                
-                for (let i = 0; i < jsonObject.results.length; i++) {
-                    contactList += "<tr><th>" + jsonObject.results[i].FirstName + " " + jsonObject.results[i].LastName + "</th><th>" +
-                        jsonObject.results[i].Phone + "</th><th>" +
-                        jsonObject.results[i].Email + "</th></tr>";
-                }
-                
-                document.getElementById("contactSearchResult").innerHTML = contactList;
-            }
-        };
-        xhr.send(jsonPayload);
-    } catch (err) {
-        document.getElementById("contactSearchResult").innerHTML = err.message;
-    }
 }
