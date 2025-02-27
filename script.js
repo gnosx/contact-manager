@@ -132,7 +132,7 @@ function readCookie()
 		if( thisOne[0] === "userId" )
 		{
 			// return userId
-			return parseInt(parts[1]);
+			return parseInt(thisOne[1]);
 		}
 	}
 
