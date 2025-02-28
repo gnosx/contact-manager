@@ -118,7 +118,7 @@ function saveCookie() {
 }
 
 // TODO: user id saving as -1 for every contact added
-function readCookie(key) {
+function readCookie() {
 	userId = -1;
 	let data = document.cookie;
 	let splits = data.split(",");
