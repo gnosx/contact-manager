@@ -56,6 +56,8 @@ function doLogin() {
 					alert("Your ID is " + userId + " " + firstName);
 
 					saveCookie();
+					readCookie();
+					alert("Your ID is " + userId + " " + firstName);
 
 					window.location.href = "contacts.html";
 				}
@@ -112,11 +114,11 @@ function saveCookie() {
 	let minutes = 20;
 	let date = new Date();
 	date.setTime(date.getTime() + (minutes * 60 * 1000));
-	document.cookie = `userId=${userId}; expires=${date.toGMTString()}; path=/`;
+	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
 // TODO: user id saving as -1 for every contact added
-function readCookie() {
+function readCookie(key) {
 	userId = -1;
 	let data = document.cookie;
 	let splits = data.split(",");
@@ -133,9 +135,6 @@ function readCookie() {
 			userId = parseInt(tokens[1].trim());
 		}
 	}
-
-
-
 }
 
 // Function to open the pop-up
@@ -151,7 +150,7 @@ function closePopup() {
 }
 
 function getContacts(searchTerm = "") {
-	readCookie();
+	let userId = readCookie("userId");
 
 	let tmp = { userId: userId, search: searchTerm };
 	let jsonPayload = JSON.stringify(tmp);
@@ -186,12 +185,14 @@ function getContacts(searchTerm = "") {
 
 function addContact() {
 	readCookie();
-	let firstName = document.getElementById("firstName").value;
-	let lastName = document.getElementById("lastName").value;
-	let phoneNumber = document.getElementById("phoneNumber").value;
-	let email = document.getElementById("email").value;
+	alert(userId);
+	let cFirstName = document.getElementById("firstName").value;
+	let cLastName = document.getElementById("lastName").value;
+	let cPhoneNumber = document.getElementById("phoneNumber").value;
+	let cEmail = document.getElementById("email").value;
 
-	let tmp = { firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, email: email, userId: userId };
+
+	let tmp = { firstName: cFirstName, lastName: cLastName, phoneNumber: cPhoneNumber, email: cEmail, userId: userId };
 	// console.log(tmp);
 	let jsonPayload = JSON.stringify(tmp);
 
