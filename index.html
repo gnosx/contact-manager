@@ -8,25 +8,28 @@
 </head>
 <body>
     <header>
-        <h1>Contact Manager Login</h1>
+        <div class="left-section">
+            <div class="container-header" style="background-color: black;">
+                <div class="left-section" style="height: 3rem; margin-left: -2rem; margin-top: 1rem;">
+                    <img src="Contact Logo.jpg" href="generalS.css">
+                </div>
+                <div class="right-section" style="height: 3rem; margin-left: 0.5rem;">
+                    <p>Contact Manager Login</p>
+                </div>
+            </div>
+        </div>
     </header>
     <div class="container">
-        <div class="left-text">
-            <h2>Create an account</h2>
-            <p>Create a contact manager account. You will need the following to create an account:</p>
-            <p>-Name</p>
-            <p>-Phone Number</p>
-            <p>-eMail</p>
-            <button onclick="location.href='create.html'" id="create">Create an Account</button>
-        </div>
         <div class="login-container">
-            <h1>Login</h1>
+            <h2>Login</h2>
             <form id="login-form">
                 <label for="loginName">Username:</label>
                 <input type="text" id="loginName" name="username" required>
                 <label for="loginPassword">Password:</label>
                 <input type="password" id="loginPassword" name="password" required>
-                <button type="button" id="loginButton" onclick="doLogin()">Login</button> <!-- Added onclick -->
+                <button type="button" id="loginButton" onclick="doLogin()">Login</button>
+                <p></p>
+                <button onclick="location.href='create.html'" id="create">Create Account</button>
             </form>
             <p id="loginResult"></p>
         </div>

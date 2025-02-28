@@ -7,84 +7,94 @@
     <link rel="stylesheet" href="generalS.css">
 </head>
 <body>
-    <!--<script>
-        // Retrieve user information from localStorage
-        const loggedInUser = localStorage.getItem('loggedInUser');
-        
-        // Display welcome message if user is logged in
-        if (loggedInUser) {
-            document.getElementById('welcome-message').textContent = `Welcome, ${loggedInUser}!`;
-        } else {
-            document.getElementById('welcome-message').textContent = 'You are not logged in.';
-        }
-    </script>-->
     <div id="welcome-message"></div>
     <header>
-            <div class="left-section">
-                <p>Contact Manager</p>
+        <div class="left-section">
+            <div class="container-header" style="background-color: black;">
+                <div class="left-section" style="height: 3rem; margin-left: -2rem; margin-top: 1rem;">
+                    <img src="Contact Logo.jpg" href="generalS.css">
+                </div>
+                <div class="right-section" style="height: 3rem; margin-top: rem; margin-left: 0.5rem;">
+                    <p>Contact Manager</p>
+                </div>
             </div>
-            <div class="right-section">
-                <p id="username-display"></p>
-                <p><a href="index.html" id="login-link">Login</a></p>
-            </div>
+        </div>
+        <div class="right-section">
+            <p id="username-display"></p>
+            <p><a href="index.html" id="login-link">Logout</a></p>
+        </div>
     </header>
-    <div class="container">
+     <div class="container">
         <div class="left-section-center">
-            <div style="display: flex;">
-                <div class="search-container">
-                    <form id="search-form">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name">
-                        <label for="number">Phone Number:</label>
-                        <input type="phone" id="phone" name="phone">
+            <h2 class="label-search" style="margin: -1rem; margin-bottom: 0rem; padding-left: 1rem; padding-right: 1rem; display:flex;">
+                <div style="align-content: left; width: 50%;">
+                    Contacts List
+                </div>
+                <div class="right-section" style="justify-content:right; width: 50%; margin-bottom: 0.5rem; gap: 1rem;">
+                    <button onclick="openPopup()" style="width: 30%;">Add</button>
+                    <button style="width: 30%;">Remove</button>       
+                </div>
+            </h2>
+            <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+            <!-- Pop-up container -->
+            <div class="popup-container" id="popupContainer">
+                <h2>
+                    <div style="align-content: left; width: 50%; padding-left: 0.5rem">
+                        Add Contact
+                    </div>
+                </h2>
+                <div class="container" style="display: flex; flex-direction: column; margin-top: -1rem;">
+                    <form id="add-form" method="post" style="width: 80%; padding: 1rem;">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                        <label for="phoneNumber">Phone Number:</label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" required>
                         <label for="email">email:</label>
-                        <input type="email" id="email" name="email">
-                        <button type="submit">Search</button>
+                        <input type="email" id="email" name="email" required>
+                        <div class="container" style="display: flex; flex-direction: column; margin-top: -0.5rem; margin-bottom: 0rem; margin-left: -1rem; width: 100%; padding-right: 1rem; gap: 0.5rem;">
+                            <button onclick="addContact()" id="add">Add Contact</button>
+                            <button class="button" onclick="closePopup()">Close</button>
+                        </div>
                     </form>
                 </div>
-                <div class="left-section-center">
-                    <div>
-                        Current editing profile
+            </div>
+            
+            <div class="container">
+                <div class="search-container">
+                    <p></p>
+                </div>
+            </div>
+            <div class="box" style="margin: 1rem; margin-top: -1.5rem;">
+                <div>
+                    <div style="display: flexbox;">
+                        <label style="display: flex;">
+                            Search:
+                            <input style="width: 80%; margin-left: 0.5rem; margin-bottom: 0.5rem;" type="text" name="search-contact" id="searchText" placeholder="Enter name, phone, or email..." oninput="searchContact()">
+                        </label>
                     </div>
+                    <table id="contactSearchResult"></table>
+                        <!--<tr>
+                            <th>Name:</th>
+                            <th>Phone:</th>
+                            <th>Email:</th>
+                        </tr>
+                        <tr>
+                            <td>Matthew Gerber</td>
+                            <td>123-456-7890</td>
+                            <td>yessir123@email.com</td>
+                        </tr>
+                        <tr>
+                            <td>We Are Cooked</td>
+                            <td>999-999-9999</td>
+                            <td>praying@email.com</td>
+                        </tr>-->
                 </div>
             </div>
-            <div class="box" style="margin: 1rem;">
-                <h2 class="box-header">Search:</h2>
-                <div class="box-content">
-                    <ol>
-                        <li>test1</li>
-                        <li>test2</li>
-                        <li>test3</li>
-                    </ol>
-                </div>
-            </div>
         </div>
-        <div class="box" style="width: 30%; margin-left: 1%;">
-            <h2 class="box-header">Contacts:</h2>
-            <div class="box-content">
-                <ol>
-                    <li>testC1</li>
-                    <li>test2</li>
-                    <li>test3</li>
-                </ol>
-            </div>
-        </div>
-        <!--<div class="right-section-center">
-            <h1 class="contact-header">Contacts:</h1>
-            <p>All know profiles</p>
-        </div>-->
-    </div>
-    <!--<div class="container">
-        <div class="left-section-center" style="width: 62%;padding: 0rem; display: block;">
-            <h1 style="width: 99.4%;">Search:</h1>
-            <lo id="contact-list">
-                <li>test1</li>
-                <li>test2</li>
-                <li>test3</li>
-                <li>All profiles that follow the current search algorithm</li> 
-            </lo>
-        </div>
-    </div>-->
-    <script src="contactJ.js"></script>
+     </div>
+    <script src="script.js"></script>
 </body>
 </html>

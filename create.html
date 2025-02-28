@@ -9,7 +9,14 @@
         <body>
             <header>
                 <div class="left-section">
-                    <p>Account Creation</p>
+                    <div class="container-header" style="background-color: black;">
+                        <div class="left-section" style="height: 3rem; margin-left: -2rem; margin-top: 1rem;">
+                            <img src="Contact Logo.jpg" href="generalS.css">
+                        </div>
+                        <div class="right-section" style="height: 3rem; margin-left: 0.5rem;">
+                            <p>Account Creation</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="right-section">
                     <p id="username-display"></p>
@@ -21,18 +28,18 @@
                     <h2>Create Account</h2>
                     <form id="create">
                         <label>First Name:</label>
-                        <input type="text" id="firstName">
+                        <input type="text" id="firstName" style="width: 70%;" required>
 
                         <label>Last Name:</label>
-                        <input type="text" id="lastName">
+                        <input type="text" id="lastName" style="width: 70%;" required>
 
                         <label>Create Username:</label>
-                        <input type="text" id="userName">
+                        <input type="text" id="userName" name="login" style="width: 70%;" required>
 
                         <label>Password:</label>
-                        <input type="password" id="userPass">
+                        <input type="password" id="userPass" name="password" style="width: 70%;" required>
 
-                        <button type="submit" onclick="doSignup()">Create</button>
+                        <button type="submit" onclick="event.preventDefault(); doSignup();">Finish</button>
                     </form>
                 </div>
             </div>
