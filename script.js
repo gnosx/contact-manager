@@ -117,25 +117,21 @@ function saveCookie() {
 	document.cookie = "firstName=" + firstName + ",lastName=" + lastName + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
-// TODO: user id saving as -1 for every contact added
+//edited readcookie
 function readCookie() {
-	userId = -1;
-	let data = document.cookie;
-	let splits = data.split(",");
-	for (var i = 0; i < splits.length; i++) {
-		let thisOne = splits[i].trim();
-		let tokens = thisOne.split("=");
-		if (tokens[0] == "firstName") {
-			firstName = tokens[1];
-		}
-		else if (tokens[0] == "lastName") {
-			lastName = tokens[1];
-		}
-		else if (tokens[0] == "userId") {
-			userId = parseInt(tokens[1].trim());
-		}
-	}
+    let cookies = document.cookie.split("; ");
+    let userId = -1;
+
+    cookies.forEach(cookie => {
+        let [key, value] = cookie.split("=");
+        if (key === "userId") {
+            userId = parseInt(value);
+        }
+    });
+
+    return userId;
 }
+
 
 // Function to open the pop-up
 function openPopup() {
@@ -150,37 +146,46 @@ function closePopup() {
 }
 
 function getContacts(searchTerm = "") {
-	let userId = readCookie("userId");
+    let userId = readCookie();  //ensure correct userId retrieval
 
-	let tmp = { userId: userId, search: searchTerm };
-	let jsonPayload = JSON.stringify(tmp);
+    if (userId < 1) {
+        console.error("Invalid userId");
+        return;
+    }
 
-	let url = urlBase + '/SearchContacts.php';  // URL pointing to your PHP script
+    let tmp = { userId: userId, search: searchTerm };
+    let jsonPayload = JSON.stringify(tmp);
 
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try {
-		xhr.onreadystatechange = function () {
-			if (this.readyState == 4 && this.status == 200) {
-				let jsonObject = JSON.parse(xhr.responseText);
-				let contactList = "";
+    let url = urlBase + '/SearchContacts.php';
 
-				for (let i = 0; i < jsonObject.results.length; i++) {
-					contactList += `<tr>
-                                        <td>${jsonObject.results[i].FirstName} ${jsonObject.results[i].LastName}</td>
-                                        <td>${jsonObject.results[i].Phone}</td>
-                                        <td>${jsonObject.results[i].Email}</td>
-                                     </tr>`;
-				}
-				document.getElementById("contactSearchResult").innerHTML = contactList;
-			}
-		};
-		xhr.send(jsonPayload);
-	} catch (err) {
-		document.getElementById("contactSearchResult").innerHTML = err.message;
-	}
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            try {
+                let jsonObject = JSON.parse(xhr.responseText);
+                if (!jsonObject.results || jsonObject.results.length === 0) {
+                    document.getElementById("contactSearchResult").innerHTML = "<tr><td>No contacts found</td></tr>";
+                    return;
+                }
+
+                let contactList = jsonObject.results.map(contact => 
+                    `<tr>
+                        <td>${contact.FirstName} ${contact.LastName}</td>
+                        <td>${contact.Phone}</td>
+                        <td>${contact.Email}</td>
+                    </tr>`).join('');
+
+                document.getElementById("contactSearchResult").innerHTML = contactList;
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+            }
+        }
+    };
+    xhr.send(jsonPayload);
 }
+
 
 
 function addContact() {
@@ -224,44 +229,46 @@ function addContact() {
 }
 
 function searchContact() {
-	let srch = document.getElementById("searchText").value;
-	document.getElementById("contactSearchResult").innerHTML = "";
+    let searchText = document.getElementById("searchText").value.trim();
+    let userId = readCookie();
 
-	let contactList = "<div>TestList</div>";
+    if (userId < 1) {
+        console.error("Invalid userId, search aborted.");
+        return;
+    }
 
-	let tmp = { search: srch, userId: userId };
-	let jsonPayload = JSON.stringify(tmp);
+    let tmp = { search: searchText, userId: userId };
+    let jsonPayload = JSON.stringify(tmp);
 
-	let url = urlBase + '/SearchContacts.' + extension;
+    let url = urlBase + '/SearchContacts.php';
 
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try {
-		contactList += "<div>TestList1</div>";
-		xhr.onreadystatechange = function () {
-			contactList += "<div>TestList2</div>";
-			if (this.readyState == 4 && this.status == 200) {
-				let jsonObject = JSON.parse(xhr.responseText);
-				contactList += "<div>TestList3 " + jsonObject.results[i].FirstName + "</div>";
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            try {
+                let jsonObject = JSON.parse(xhr.responseText);
+                let contactList = "";
 
-				for (let i = 0; i < jsonObject.results.length; i++) {
-					contactList += "<div>TestList4</div>";
-					contactList += "<tr><th>" + jsonObject.results[i].FirstName + " " + jsonObject.results[i].LastName + "</th><th>" +
-						jsonObject.results[i].Phone + "</th><th>" +
-						jsonObject.results[i].Email + "</th></tr>";
-				}
-				contactList += "<div>TestList5</div>";
+                if (!jsonObject.results || jsonObject.results.length === 0) {
+                    document.getElementById("contactSearchResult").innerHTML = "<tr><td>No matching contacts found</td></tr>";
+                    return;
+                }
 
-				document.getElementById("contactSearchResult").innerHTML = contactList;
-			}
-			contactList += "<div>TestList6</div>";
-		};
-		contactList += "<div>TestList7</div>";
-		xhr.send(jsonPayload);
-	} catch (err) {
-		contactList += "<div>TestList8</div>";
-		document.getElementById("contactSearchResult").innerHTML = err.message;
-	}
-	contactList += "<div>TestList9</div>";
+                jsonObject.results.forEach(contact => {
+                    contactList += `<tr>
+                                        <td>${contact.FirstName} ${contact.LastName}</td>
+                                        <td>${contact.Phone}</td>
+                                        <td>${contact.Email}</td>
+                                    </tr>`;
+                });
+
+                document.getElementById("contactSearchResult").innerHTML = contactList;
+            } catch (error) {
+                console.error("Error parsing search response:", error);
+            }
+        }
+    };
+    xhr.send(jsonPayload);
 }
