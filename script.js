@@ -170,7 +170,12 @@ function contactsTable(contacts) {
             <td>${element.FirstName} ${element.LastName}</td>
             <td>${element.Phone}</td>
             <td>${element.Email}</td>
-			<td><button style="display: flex;">Edit</button> <button style="display: flex;">Delete</button></td>
+			<td>
+				<div style="display: flex; gap: 7px; justify-content: center; align-items: center;">
+					<button style="padding: 5px 10px;" onclick="">Edit</button>
+					<button style="padding: 5px 10px;" onclick="deleteContact(${element.ID})">Delete</button>
+		  		</div>
+		  	</td>
         `;
         contactTable.appendChild(row);
     });
@@ -273,15 +278,15 @@ function searchContact() {
 	}
 }
 
-function removeContact(contactId) {
+function deleteContact(contactId) {
     if (!confirm("Are you sure you want to delete this contact?")) {
         return;
     }
 
-    let tmp = { userId: userId, contactId: contactId };
+    let tmp = { contactId: contactId };
     let jsonPayload = JSON.stringify(tmp);
 
-    let url = urlBase + '/removeContact.' + extension;
+    let url = urlBase + '/DeleteContact.' + extension;
 
     fetch(url, {
         method: "POST",
@@ -297,7 +302,7 @@ function removeContact(contactId) {
     .then(data => {
         if (data.error === "") {
             alert("Contact Removed!");
-            window.location.reload(); // Refresh the contact list
+            window.location.reload();
         } else {
             alert("Error: " + data.error);
         }

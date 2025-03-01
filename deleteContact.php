@@ -1,35 +1,52 @@
 <?php
-    session_start();
-    header("Access-Control-Allow-Origin: *");
-    header("Content-Type: application/json; charset=UTF-8");
+	$inData = getRequestInfo();
+	
+    // create variables
+    $ID = $inData["ID"];
 
-    $inData = json_decode(file_get_contents("php://input"), true);
+    // create new connection
+    $conn = new mysqli("localhost", "Group4", "fouristhebest", "ContactMan");    
+	if ($conn->connect_error) 
+	{
+		returnWithError( $conn->connect_error );
+        exit();
+	} 
+	else
+	{
+        // delete contact
+        $stmt = $conn->prepare("DELETE from CONTACTS WHERE ID=?");
+        $stmt->bind_param("s", $ID);
 
-    $conn = new mysqli("localhost", "Group4", "fouristhebest", "ContactMan");
+        if ($stmt->execute()) {
+            returnWithInfo($ID);
+        } else {
+            returnWithError("Error deleting contact");
+        }
+        
+        $stmt->close();
+        $conn->close();
+	}
 
-    if ($conn->connect_error) {
-        die(json_encode(["error" => "Database connection failed: " . $conn->connect_error]));
+	function getRequestInfo()
+	{
+		return json_decode(file_get_contents('php://input'), true);
+	}
+
+	function sendResultInfoAsJson( $obj )
+	{
+		header('Content-type: application/json');
+		echo $obj;
+	}
+	
+    function returnWithError( $err )
+    {
+        $retValue = '{"id":0,"error":"' . $err . '"}';
+        sendResultInfoAsJson( $retValue );
     }
 
-    if (!isset($_SESSION["user_id"])) {
-        die(json_encode(["error" => "Unauthorized access. Please log in."]));
+    function returnWithInfo( $id )
+    {
+        $retValue = '{"id":' . $id . ',"error":""}';
+        sendResultInfoAsJson( $retValue );
     }
-
-    $contactId = $conn->real_escape_string($inData["contactId"]);
-    $userId = $_SESSION["user_id"]; // Ensure the user is only deleting their own contacts
-
-    // Check if the contact belongs to the logged-in user
-    $sql = "DELETE FROM Contacts WHERE ID=? AND UserID=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ii", $contactId, $userId);
-    $stmt->execute();
-
-    if ($stmt->affected_rows > 0) {
-        echo json_encode(["success" => "Contact deleted successfully"]);
-    } else {
-        echo json_encode(["error" => "Contact not found or you don't have permission"]);
-    }
-
-    $stmt->close();
-    $conn->close();
 ?>
