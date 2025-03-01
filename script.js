@@ -135,6 +135,9 @@ function readCookie() {
 	}
 }
 
+// read cookie on page load
+readCookie();
+
 // Function to open the pop-up
 function openPopup() {
 	document.getElementById('popupContainer').style.display = 'block';
