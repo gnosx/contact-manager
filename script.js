@@ -248,7 +248,7 @@ function addContact() {
 function searchContact() {
 	readCookie();
 	let srch = document.getElementById("searchText").value;
-	document.getElementById("contactSearchResult").innerHTML = "";
+	document.getElementById("contactResult").innerHTML = "";
 
 	let contactList = "";
 
@@ -271,12 +271,12 @@ function searchContact() {
 						jsonObject.results[i].Email + "</th></tr>";
 				}
 
-				document.getElementById("contactSearchResult").innerHTML = contactList;
+				document.getElementById("contactResult").innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);
 	} catch (err) {
-		document.getElementById("contactSearchResult").innerHTML = err.message;
+		document.getElementById("contactResult").innerHTML = err.message;
 	}
 }
 
