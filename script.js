@@ -283,8 +283,10 @@ function deleteContact(contactId) {
         return;
     }
 
-    let tmp = { contactId: contactId };
+    let tmp = { ID: contactId };
+	console.log("del temp: " + tmp);
     let jsonPayload = JSON.stringify(tmp);
+	console.log("del json: " + jsonPayload);
 
     let url = urlBase + '/DeleteContact.' + extension;
 
