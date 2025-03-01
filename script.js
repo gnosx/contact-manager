@@ -193,7 +193,7 @@ function getContacts(userId) {
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
-			return;
+			return response.json();
 		})
 		.then(data => {
 			console.log(data);
