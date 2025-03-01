@@ -264,8 +264,6 @@ function searchContact() {
 				let jsonObject = JSON.parse(xhr.responseText);
 
 				contactDisplay(jsonObject.results);
-
-				document.getElementById("contactResult").innerHTML = contactList;
 			}
 		};
 		xhr.send(jsonPayload);
