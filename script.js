@@ -244,11 +244,8 @@ function addContact() {
 }
 
 function searchContact() {
-	readCookie();
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("contactResult").innerHTML = "";
-
-	let contactList = "";
 
 	let tmp = { search: srch, userId: userId };
 	let jsonPayload = JSON.stringify(tmp);
@@ -263,7 +260,7 @@ function searchContact() {
 			if (this.readyState == 4 && this.status == 200) {
 				let jsonObject = JSON.parse(xhr.responseText);
 
-				contactDisplay(jsonObject.results);
+				contactDisplay(jsonObject.contacts);
 				console.log(jsonObject);
 			}
 		};
@@ -272,8 +269,6 @@ function searchContact() {
 		document.getElementById("contactResult").innerHTML = err.message;
 	}
 }
-
-
 
 function removeContact(contactId) {
     if (!confirm("Are you sure you want to delete this contact?")) {
