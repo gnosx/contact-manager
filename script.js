@@ -147,39 +147,63 @@ function closePopup() {
 	document.getElementById('overlay').style.display = 'none';
 }
 
-function getContacts(searchTerm = "") {
-	let userId = readCookie("userId");
-
-	let tmp = { userId: userId, search: searchTerm };
-	let jsonPayload = JSON.stringify(tmp);
-
-	let url = urlBase + '/SearchContacts.php';  // URL pointing to your PHP script
-
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try {
-		xhr.onreadystatechange = function () {
-			if (this.readyState == 4 && this.status == 200) {
-				let jsonObject = JSON.parse(xhr.responseText);
-				let contactList = "";
-
-				for (let i = 0; i < jsonObject.results.length; i++) {
-					contactList += `<tr>
-                                        <td>${jsonObject.results[i].FirstName} ${jsonObject.results[i].LastName}</td>
-                                        <td>${jsonObject.results[i].Phone}</td>
-                                        <td>${jsonObject.results[i].Email}</td>
-                                     </tr>`;
-				}
-				document.getElementById("contactSearchResult").innerHTML = contactList;
-			}
-		};
-		xhr.send(jsonPayload);
-	} catch (err) {
-		document.getElementById("contactSearchResult").innerHTML = err.message;
+function contactsTable(contacts) {
+	let contactDisplay = document.getElementById("contactResult"); 
+	contactDisplay.innerHTML = "";
+	if(contacts === undefined || contacts.length == 0) {
+		contactDisplay.innerHTML = "<p>No contacts</p>";
+		return;
 	}
+
+	// each contact will generate this div
+	contacts.forEach(element => {
+		let contactTable = document.createElement("table");
+
+		// contact style
+		// contactDiv.className = "contact";
+
+		contactTable.innerHTML = 
+			`<tr>
+				<th>Name:</th>
+				<th>Phone:</th>
+				<th>Email:</th>
+			</tr>
+			<tr>
+				<td>${element.FirstName + " " + element.LastName}</td>
+				<td>${element.Phone}</td>
+				<td>${element.Email}</td>
+			</tr>
+			`;
+		contactDisplay.appendChild(contactTable);
+	});
 }
 
+function getContacts(userId) {
+	let tmp = { userId: userId };
+	let jsonPayload = JSON.stringify(tmp);
+
+	let url = urlBase + '/GetContacts.' + extension;
+
+	fetch(url, {
+		method: "POST",
+		body: jsonPayload,
+		headers: { "Content-Type": "application/json" }
+	})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+			return;
+		})
+		.then(data => {
+			console.log(data);
+			contactsTable(data);
+		})
+		.catch(error => {
+			console.error("Error:", error);
+			alert("Grabbing contacts failed: " + error.message);
+		});
+}
 
 function addContact() {
 	readCookie();
@@ -255,6 +279,8 @@ function searchContact() {
 		document.getElementById("contactSearchResult").innerHTML = err.message;
 	}
 }
+
+
 
 function removeContact(contactId) {
     if (!confirm("Are you sure you want to delete this contact?")) {
