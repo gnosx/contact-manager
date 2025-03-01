@@ -56,8 +56,6 @@ function doLogin() {
 					alert("Your ID is " + userId + " " + firstName);
 
 					saveCookie();
-					readCookie();
-					alert("Your ID is " + userId + " " + firstName);
 
 					window.location.href = "contacts.html";
 				}
