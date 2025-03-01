@@ -194,7 +194,7 @@ function getContacts() {
 		})
 		.then(data => {
 			console.log(data);
-			contactsTable(data);
+			contactsTable(data.contacts);
 		})
 		.catch(error => {
 			console.error("Error:", error);
