@@ -55,7 +55,6 @@ function doLogin() {
 				else {
 					firstName = jsonObject.firstName;
 					lastName = jsonObject.lastName;
-					alert("Your ID is " + userId + " " + firstName);
 
 					saveCookie();
 
@@ -210,7 +209,6 @@ function getContacts() {
 
 function addContact() {
 	readCookie();
-	alert(userId);
 	let cFirstName = document.getElementById("firstName").value;
 	let cLastName = document.getElementById("lastName").value;
 	let cPhoneNumber = document.getElementById("phoneNumber").value;
