@@ -251,7 +251,8 @@ function searchContact() {
 	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/SearchContacts.' + extension;
-
+	console.log("tmp: " + tmp);
+	console.log("jsonpayload: " + jsonPayload);
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
