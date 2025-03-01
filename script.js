@@ -241,7 +241,6 @@ function addContact() {
 		})
 		.catch(error => {
 			console.error("Error:", error);
-			alert("Contact creation failed: " + error.message);
 		});
 }
 
