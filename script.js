@@ -263,3 +263,37 @@ function searchContact() {
 	}
 	contactList += "<div>TestList9</div>";
 }
+function removeContact(contactId) {
+    if (!confirm("Are you sure you want to delete this contact?")) {
+        return;
+    }
+
+    let tmp = { userId: userId, contactId: contactId };
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/removeContact.' + extension;
+
+    fetch(url, {
+        method: "POST",
+        body: jsonPayload,
+        headers: { "Content-Type": "application/json" }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.error === "") {
+            alert("Contact Removed!");
+            window.location.reload(); // Refresh the contact list
+        } else {
+            alert("Error: " + data.error);
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Contact removal failed: " + error.message);
+    });
+}
