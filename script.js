@@ -118,17 +118,16 @@ function saveCookie() {
 function readCookie() {
 	userId = -1;
 	let data = document.cookie;
-	console.log(data);
 	let splits = data.split(";");
 	for (var i = 0; i < splits.length; i++) {
 		let thisOne = splits[i].trim();
 		console.log(thisOne);
 		let tokens = thisOne.split("=");
 		if (tokens[0] == "userId") {
+			console.log(parseInt(tokens[1].trim()));
 			userId = parseInt(tokens[1].trim());
 		}
 	}
-	console.log(data);
 }
 
 // Function to open the pop-up
@@ -178,7 +177,7 @@ function getContacts(userId) {
 	readCookie();
 	let tmp = { userId: userId };
 	let jsonPayload = JSON.stringify(tmp);
-
+	console.log(jsonPayload);
 	let url = urlBase + '/GetContacts.' + extension;
 
 	fetch(url, {
