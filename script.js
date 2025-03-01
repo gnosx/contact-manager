@@ -173,9 +173,10 @@ function contactsTable(contacts) {
 	});
 }
 
-function getContacts(userId) {
+function getContacts() {
 	readCookie();
 	let tmp = { userId: userId };
+	console.log(tmp);
 	let jsonPayload = JSON.stringify(tmp);
 	console.log(jsonPayload);
 	let url = urlBase + '/GetContacts.' + extension;
