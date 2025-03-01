@@ -150,7 +150,7 @@ function closePopup() {
 function contactsTable(contacts) {
 	let contactDisplay = document.getElementById("contactResult"); 
 	contactDisplay.innerHTML = "";
-	if(contacts === undefined || contacts.length == 0) {
+	if(!contacts || contacts.length == 0) {
 		contactDisplay.innerHTML = "<p>No contacts</p>";
 		return;
 	}
