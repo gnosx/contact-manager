@@ -261,7 +261,7 @@ function searchContact() {
 			if (this.readyState == 4 && this.status == 200) {
 				let jsonObject = JSON.parse(xhr.responseText);
 
-				contactDisplay(jsonObject.contacts);
+				contactsTable(jsonObject.contacts);
 				console.log(jsonObject);
 			}
 		};
