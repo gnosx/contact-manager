@@ -123,10 +123,8 @@ function readCookie() {
 	let splits = data.split(";");
 	for (var i = 0; i < splits.length; i++) {
 		let thisOne = splits[i].trim();
-		console.log(thisOne);
 		let tokens = thisOne.split("=");
 		if (tokens[0] == "userId") {
-			console.log(parseInt(tokens[1].trim()));
 			userId = parseInt(tokens[1].trim());
 		}
 	}
@@ -187,9 +185,7 @@ function contactsTable(contacts) {
 function getContacts() {
 	readCookie();
 	let tmp = { userId: userId };
-	console.log(tmp);
 	let jsonPayload = JSON.stringify(tmp);
-	console.log(jsonPayload);
 	let url = urlBase + '/GetContacts.' + extension;
 
 	fetch(url, {
@@ -204,7 +200,6 @@ function getContacts() {
 			return response.json();
 		})
 		.then(data => {
-			console.log(data);
 			contactsTable(data.contacts);
 		})
 		.catch(error => {
@@ -223,7 +218,6 @@ function addContact() {
 
 
 	let tmp = { firstName: cFirstName, lastName: cLastName, phoneNumber: cPhoneNumber, email: cEmail, userId: userId };
-	// console.log(tmp);
 	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/AddContact.' + extension;
@@ -261,8 +255,7 @@ function searchContact() {
 	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/SearchContacts.' + extension;
-	console.log("tmp: " + tmp);
-	console.log("jsonpayload: " + jsonPayload);
+
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -272,7 +265,6 @@ function searchContact() {
 				let jsonObject = JSON.parse(xhr.responseText);
 
 				contactsTable(jsonObject.contacts);
-				console.log(jsonObject);
 			}
 		};
 		xhr.send(jsonPayload);
@@ -287,9 +279,7 @@ function deleteContact(contactId) {
     }
 
     let tmp = { ID: contactId };
-	console.log("del temp: " + tmp);
     let jsonPayload = JSON.stringify(tmp);
-	console.log("del json: " + jsonPayload);
 
     let url = urlBase + '/DeleteContact.' + extension;
 
@@ -329,7 +319,6 @@ function loadContact(firstName, lastName, email, phoneNumber, ID) {
 	email_label.value = email;
 	phone_num.value = phoneNumber;
 	IDforEdit = ID;
-	console.log("load id for edit: " + IDforEdit);
 
 	openPopup(0);
 }
@@ -340,13 +329,9 @@ function editContact() {
 	let cPhoneNumber = document.getElementById("phoneNumber").value;
 	let cEmail = document.getElementById("email").value;
 
-	console.log(IDforEdit);
 	let tmp = { firstName: cFirstName, lastName: cLastName, phoneNumber: cPhoneNumber, email: cEmail, ID: IDforEdit };
-	// console.log(tmp);
 	let jsonPayload = JSON.stringify(tmp);
 
-	console.log("edit tmp: " + tmp);
-	console.log("edit json: " + jsonPayload);
 	let url = urlBase + '/EditContact.' + extension;
 
 	fetch(url, {
