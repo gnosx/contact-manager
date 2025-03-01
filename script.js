@@ -131,9 +131,6 @@ function readCookie() {
 	console.log(data);
 }
 
-// read cookie on page load
-readCookie();
-
 // Function to open the pop-up
 function openPopup() {
 	document.getElementById('popupContainer').style.display = 'block';
@@ -178,6 +175,7 @@ function contactsTable(contacts) {
 }
 
 function getContacts(userId) {
+	readCookie();
 	let tmp = { userId: userId };
 	let jsonPayload = JSON.stringify(tmp);
 
