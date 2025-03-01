@@ -143,39 +143,35 @@ function closePopup() {
 }
 
 function contactsTable(contacts) {
-	let contactDisplay = document.getElementById("contactResult"); 
-	contactDisplay.innerHTML = "";
-	if(!contacts || contacts.length == 0) {
-		contactDisplay.innerHTML = "<p>No contacts</p>";
-		return;
-	}
+    let contactDisplay = document.getElementById("contactResult"); 
+    contactDisplay.innerHTML = "";
+    
+    if(!contacts || contacts.length == 0) {
+        contactDisplay.innerHTML = "<p>No contacts</p>";
+        return;
+    }
 
-	let contactTable = document.createElement("table");
-	contactTable.innerHTML = 
-	`
-	<tr>
-		<th>Name:</th>
-		<th>Phone:</th>
-		<th>Email:</th>
-	</tr>
-	`
-	contactDisplay.appendChild(contactTable);
-	
-	// each contact will generate this div
-	contacts.forEach(element => {
-		// contact style
-		// contactDiv.className = "contact";
+    // create the table and append the header
+    let contactTable = document.createElement("table");
+    contactTable.innerHTML = `
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+    </tr>
+    `;
+    contactDisplay.appendChild(contactTable);
 
-		contactTable.innerHTML = 
-			`
-			<tr>
-				<td>${element.FirstName + " " + element.LastName}</td>
-				<td>${element.Phone}</td>
-				<td>${element.Email}</td>
-			</tr>
-			`;
-		contactDisplay.appendChild(contactTable);
-	});
+    // loop through each contact and add a row for each
+    contacts.forEach(element => {
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${element.FirstName} ${element.LastName}</td>
+            <td>${element.Phone}</td>
+            <td>${element.Email}</td>
+        `;
+        contactTable.appendChild(row);
+    });
 }
 
 function getContacts() {
