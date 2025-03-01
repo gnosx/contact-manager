@@ -172,7 +172,7 @@ function contactsTable(contacts) {
             <td>${element.Email}</td>
 			<td>
 				<div style="display: flex; gap: 7px; justify-content: center; align-items: center;">
-					<button style="padding: 5px 10px;" onclick="">Edit</button>
+					<button style="padding: 5px 10px;" onclick="editContact(${element.FirstName}, ${element.LastName}, ${element.Email}, ${element.Phone})">Edit</button>
 					<button style="padding: 5px 10px;" onclick="deleteContact(${element.ID})">Delete</button>
 		  		</div>
 		  	</td>
@@ -313,4 +313,18 @@ function deleteContact(contactId) {
         console.error("Error:", error);
         alert("Contact removal failed: " + error.message);
     });
+}
+
+function editContact(firstName, lastName, email, phoneNumber) {
+	let first_name = document.getElementById("firstName");
+	let last_name = document.getElementById("lastName");
+	let email_label = document.getElementById("email");
+	let phone_num = document.getElementById("phoneNumber");
+
+	first_name.value = firstName;
+	last_name.value = lastName;
+	email_label.value = email;
+	phone_num.value = phoneNumber;
+
+	openPopup();
 }
