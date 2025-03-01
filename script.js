@@ -150,19 +150,24 @@ function contactsTable(contacts) {
 		return;
 	}
 
+	let contactTable = document.createElement("table");
+	contactTable.innerHTML = 
+	`
+	<tr>
+		<th>Name:</th>
+		<th>Phone:</th>
+		<th>Email:</th>
+	</tr>
+	`
+	contactDisplay.appendChild(contactTable);
+	
 	// each contact will generate this div
 	contacts.forEach(element => {
-		let contactTable = document.createElement("table");
-
 		// contact style
 		// contactDiv.className = "contact";
 
 		contactTable.innerHTML = 
-			`<tr>
-				<th>Name:</th>
-				<th>Phone:</th>
-				<th>Email:</th>
-			</tr>
+			`
 			<tr>
 				<td>${element.FirstName + " " + element.LastName}</td>
 				<td>${element.Phone}</td>
