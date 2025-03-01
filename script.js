@@ -222,6 +222,7 @@ function addContact() {
 }
 
 function searchContact() {
+	readCookie();
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("contactSearchResult").innerHTML = "";
 
