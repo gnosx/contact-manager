@@ -329,6 +329,7 @@ function loadContact(firstName, lastName, email, phoneNumber, ID) {
 	email_label.value = email;
 	phone_num.value = phoneNumber;
 	IDforEdit = ID;
+	console.log("load id for edit: " + IDforEdit);
 
 	openPopup(0);
 }
