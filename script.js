@@ -170,7 +170,7 @@ function contactsTable(contacts) {
             <td>${element.FirstName} ${element.LastName}</td>
             <td>${element.Phone}</td>
             <td>${element.Email}</td>
-			<td><button>Edit</button> <button>Delete</button></td>
+			<td><button style="display: flex;">Edit</button> <button style="display: flex;">Delete</button></td>
         `;
         contactTable.appendChild(row);
     });
