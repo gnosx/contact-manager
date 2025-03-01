@@ -14,7 +14,7 @@
 	else
 	{
         // grab contacts
-        $stmt = $conn->prepare("SELECT firstName, lastName, Email, UserID FROM Contacts WHERE UserID=?");
+        $stmt = $conn->prepare("SELECT FirstName, LastName, Email, UserID FROM Contacts WHERE UserID=?");
         $stmt->bind_param("s", $userId);
         $stmt->execute()
         $result = $stmt->get_result();
