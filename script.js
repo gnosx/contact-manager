@@ -4,6 +4,8 @@ const extension = 'php';
 let userId = 0;
 let firstName = "";
 let lastName = "";
+let isAdd = 1;	// variable for checking if add or edit was clicked
+let IDforEdit = 0;
 
 // listener for logging out
 document.getElementById('login-form')?.addEventListener('submit', function (event) {
@@ -131,7 +133,8 @@ function readCookie() {
 }
 
 // Function to open the pop-up
-function openPopup() {
+function openPopup(val) {
+	isAdd = val;
 	document.getElementById('popupContainer').style.display = 'block';
 	document.getElementById('overlay').style.display = 'block';
 }
@@ -172,7 +175,7 @@ function contactsTable(contacts) {
             <td>${element.Email}</td>
 			<td>
 				<div style="display: flex; gap: 7px; justify-content: center; align-items: center;">
-					<button style="padding: 5px 10px;" onclick="editContact('${element.FirstName}', '${element.LastName}', '${element.Email}', '${element.Phone}')">Edit</button>
+					<button style="padding: 5px 10px;" onclick="loadContact('${element.FirstName}', '${element.LastName}', '${element.Email}', '${element.Phone}')">Edit</button>
 					<button style="padding: 5px 10px;" onclick="deleteContact(${element.ID})">Delete</button>
 		  		</div>
 		  	</td>
@@ -315,7 +318,7 @@ function deleteContact(contactId) {
     });
 }
 
-function editContact(firstName, lastName, email, phoneNumber) {
+function loadContact(firstName, lastName, email, phoneNumber, ID) {
 	let first_name = document.getElementById("firstName");
 	let last_name = document.getElementById("lastName");
 	let email_label = document.getElementById("email");
@@ -325,6 +328,53 @@ function editContact(firstName, lastName, email, phoneNumber) {
 	last_name.value = lastName;
 	email_label.value = email;
 	phone_num.value = phoneNumber;
+	IDforEdit = ID;
 
-	openPopup();
+	openPopup(0);
+}
+
+function editContact() {
+	let cFirstName = document.getElementById("firstName").value;
+	let cLastName = document.getElementById("lastName").value;
+	let cPhoneNumber = document.getElementById("phoneNumber").value;
+	let cEmail = document.getElementById("email").value;
+
+	let tmp = { firstName: cFirstName, lastName: cLastName, phoneNumber: cPhoneNumber, email: cEmail, ID: IDforEdit };
+	// console.log(tmp);
+	let jsonPayload = JSON.stringify(tmp);
+
+	let url = urlBase + '/EditContact.' + extension;
+
+	fetch(url, {
+		method: "POST",
+		body: jsonPayload,
+		headers: { "Content-Type": "application/json" }
+	})
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then(data => {
+			if (data.error === "") {
+				alert("Contact Edited!");
+				window.location.href = "contacts.html";
+			} else {
+				alert("Error: " + data.error);
+			}
+		})
+		.catch(error => {
+			console.error("Error:", error);
+			alert("Contact edit failed: " + error.message);
+		});
+}
+
+function updateContact() {
+	// check isAdd
+	if(isAdd == 0) {
+		editContact();
+	} else if(isAdd == 1) {
+		addContact();
+	}
 }

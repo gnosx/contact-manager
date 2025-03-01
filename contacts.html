@@ -31,7 +31,7 @@
                     Contacts List
                 </div>
                 <div class="right-section" style="justify-content:right; width: 50%; margin-bottom: 0.5rem; gap: 1rem;">
-                    <button onclick="openPopup()" style="width: 30%;">Add</button>
+                    <button onclick="openPopup(1)" style="width: 30%;">Add</button>
                     <button style="width: 30%;">Remove</button>       
                 </div>
             </h2>
@@ -41,7 +41,7 @@
             <div class="popup-container" id="popupContainer">
                 <h2>
                     <div style="align-content: left; width: 50%; padding-left: 0.5rem">
-                        Add Contact
+                        Contact Info
                     </div>
                 </h2>
                 <div class="container" style="display: flex; flex-direction: column; margin-top: -1rem;">
@@ -55,7 +55,7 @@
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
                         <div class="container" style="display: flex; flex-direction: column; margin-top: -0.5rem; margin-bottom: 0rem; margin-left: -1rem; width: 100%; padding-right: 1rem; gap: 0.5rem;">
-                            <button onclick="addContact()" id="add">Add Contact</button>
+                            <button onclick="updateContact()" id="add">Save</button>
                             <button class="button" onclick="closePopup()">Close</button>
                         </div>
                     </form>
