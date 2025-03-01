@@ -113,3 +113,48 @@ function searchContact() {
         document.getElementById("contactSearchResult").innerHTML = err.message;
     }
 }
+
+function searchContact() {
+    let searchText = document.getElementById("searchText").value.trim();
+    let userId = readCookie();
+
+    if (userId < 1) {
+        console.error("Invalid userId, search aborted.");
+        return;
+    }
+
+    let tmp = { search: searchText, userId: userId };
+    let jsonPayload = JSON.stringify(tmp);
+
+    let url = urlBase + '/SearchContacts.php';
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            try {
+                let jsonObject = JSON.parse(xhr.responseText);
+                let contactList = "";
+
+                if (!jsonObject.results || jsonObject.results.length === 0) {
+                    document.getElementById("contactSearchResult").innerHTML = "<tr><td>No matching contacts found</td></tr>";
+                    return;
+                }
+
+                jsonObject.results.forEach(contact => {
+                    contactList += `<tr>
+                                        <td>${contact.FirstName} ${contact.LastName}</td>
+                                        <td>${contact.Phone}</td>
+                                        <td>${contact.Email}</td>
+                                    </tr>`;
+                });
+
+                document.getElementById("contactSearchResult").innerHTML = contactList;
+            } catch (error) {
+                console.error("Error parsing search response:", error);
+            }
+        }
+    };
+    xhr.send(jsonPayload);
+}

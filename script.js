@@ -241,7 +241,7 @@ function searchContact() {
 			contactList += "<div>TestList2</div>";
 			if (this.readyState == 4 && this.status == 200) {
 				let jsonObject = JSON.parse(xhr.responseText);
-				contactList += "<div>TestList3 " + jsonObject.results[i].FirstName + "</div>";
+				contactList += "<div>TestList3 " + userId + "</div>";
 
 				for (let i = 0; i < jsonObject.results.length; i++) {
 					contactList += "<div>TestList4</div>";
@@ -263,6 +263,7 @@ function searchContact() {
 	}
 	contactList += "<div>TestList9</div>";
 }
+
 function removeContact(contactId) {
     if (!confirm("Are you sure you want to delete this contact?")) {
         return;
