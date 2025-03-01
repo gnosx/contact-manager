@@ -16,7 +16,7 @@
         // grab contacts
         $stmt = $conn->prepare("SELECT FirstName, LastName, Email, UserID FROM Contacts WHERE UserID=?");
         $stmt->bind_param("s", $userId);
-        $stmt->execute()
+        $stmt->execute();
         $result = $stmt->get_result();
 
         // arr to hold contacts
@@ -55,9 +55,8 @@
         sendResultInfoAsJson( $retValue );
     }
 
-    function returnWithInfo( $contacts )
-    {
+    function returnWithInfo($contacts) {
         $retValue = json_encode(["contacts" => $contacts]);
-        sendResultInfoAsJson( $retValue );
+        sendResultInfoAsJson($retValue);
     }
 ?>
