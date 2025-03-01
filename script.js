@@ -339,10 +339,13 @@ function editContact() {
 	let cPhoneNumber = document.getElementById("phoneNumber").value;
 	let cEmail = document.getElementById("email").value;
 
+	console.log(IDforEdit);
 	let tmp = { firstName: cFirstName, lastName: cLastName, phoneNumber: cPhoneNumber, email: cEmail, ID: IDforEdit };
 	// console.log(tmp);
 	let jsonPayload = JSON.stringify(tmp);
 
+	console.log("edit tmp: " + tmp);
+	console.log("edit json: " + jsonPayload);
 	let url = urlBase + '/EditContact.' + extension;
 
 	fetch(url, {
