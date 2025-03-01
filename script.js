@@ -175,7 +175,7 @@ function contactsTable(contacts) {
             <td>${element.Email}</td>
 			<td>
 				<div style="display: flex; gap: 7px; justify-content: center; align-items: center;">
-					<button style="padding: 5px 10px;" onclick="loadContact('${element.FirstName}', '${element.LastName}', '${element.Email}', '${element.Phone}')">Edit</button>
+					<button style="padding: 5px 10px;" onclick="loadContact('${element.FirstName}', '${element.LastName}', '${element.Email}', '${element.Phone}', '${element.ID}')">Edit</button>
 					<button style="padding: 5px 10px;" onclick="deleteContact(${element.ID})">Delete</button>
 		  		</div>
 		  	</td>
