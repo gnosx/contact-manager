@@ -48,7 +48,7 @@ function doLogin() {
 				userId = jsonObject.id;
 
 				if (userId === undefined) {
-					alert("WRONG");
+					document.getElementById('error-message').style.display = 'block';
 					//document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
 					return;
 				}

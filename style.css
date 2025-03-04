@@ -131,3 +131,7 @@ footer {
     width: 50%;
     /*margin-top: 0px; /* Add margin to the top as needed */
 }
+
+#error-message {
+    margin-top: 10px;
+}
