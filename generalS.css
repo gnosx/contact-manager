@@ -272,12 +272,18 @@ footer {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 25%;
     padding: 0rem;
     background-color: white;
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     z-index: 1000;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
 }
 
 .overlay {

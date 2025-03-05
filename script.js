@@ -7,6 +7,10 @@ let lastName = "";
 let isAdd = 1;	// variable for checking if add or edit was clicked
 let IDforEdit = 0;
 
+var popup = document.getElementById("popup");
+var triggerButton = document.getElementById("triggerButton");
+var close = document.getElementsByClassName("close")[0];
+
 // listener for logging out
 document.getElementById('login-form')?.addEventListener('submit', function (event) {
 	event.preventDefault(); // Prevent the form from submitting the traditional way
@@ -97,15 +101,18 @@ function doSignup() {
 		})
 		.then(data => {
 			if (data.error === "") {
-				alert("Account Created!");
+				document.getElementById("popup-message").textContent = "Account Created!";
+    	    	popup.style.display = "block";
 				window.location.href = "index.html";
 			} else {
-				alert("Error: " + data.error);
+				document.getElementById("popup-message").textContent = "Error: " + data.error;
+    	    	popup.style.display = "block";
 			}
 		})
 		.catch(error => {
 			console.error("Error:", error);
-			alert("Sign up failed: " + error.message);
+			document.getElementById("popup-message").textContent = "Sign up failed: " + error.message;
+    	    popup.style.display = "block";
 		});
 }
 
@@ -203,7 +210,6 @@ function getContacts() {
 		})
 		.catch(error => {
 			console.error("Error:", error);
-			alert("Grabbing contacts failed: " + error.message);
 		});
 }
 
@@ -233,10 +239,12 @@ function addContact() {
 		})
 		.then(data => {
 			if (data.error === "") {
-				alert("Contact Added!");
+				document.getElementById('add-message').style.display = 'block';
+    	    	popup.style.display = "block";
 				window.location.href = "contacts.html";
 			} else {
-				alert("Error: " + data.error);
+				document.getElementById("popup-message").textContent = "Error: " + data.error;
+    	    	popup.style.display = "block";
 			}
 		})
 		.catch(error => {
@@ -293,15 +301,18 @@ function deleteContact(contactId) {
     })
     .then(data => {
         if (data.error === "") {
-            alert("Contact Removed!");
+			document.getElementById("popup-message").textContent = "Contact Removed!";
+    	    popup.style.display = "block";
             window.location.reload();
         } else {
-            alert("Error: " + data.error);
+			document.getElementById("popup-message").textContent = "Error: " + data.error;
+    	    popup.style.display = "block";
         }
     })
     .catch(error => {
         console.error("Error:", error);
-        alert("Contact removal failed: " + error.message);
+		document.getElementById("popup-message").textContent = "Contact removal failed: " + error.message;
+    	popup.style.display = "block";
     });
 }
 
@@ -344,15 +355,18 @@ function editContact() {
 		})
 		.then(data => {
 			if (data.error === "") {
-				alert("Contact Edited!");
+				document.getElementById("popup-message").textContent = "Contact Edited!";
+    			popup.style.display = "block";
 				window.location.href = "contacts.html";
 			} else {
-				alert("Error: " + data.error);
+				document.getElementById("popup-message").textContent = "Error: " + data.error;
+    			popup.style.display = "block";
 			}
 		})
 		.catch(error => {
 			console.error("Error:", error);
-			alert("Contact edit failed: " + error.message);
+			document.getElementById("popup-message").textContent = "Contact edit failed: " + error.message;
+    		popup.style.display = "block";
 		});
 }
 
