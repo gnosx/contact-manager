@@ -102,17 +102,17 @@ function doSignup() {
 		.then(data => {
 			if (data.error === "") {
 				document.getElementById("popup-message").textContent = "Account Created!";
-    	    	popup.style.display = "block";
+    	    	popupContainer.style.display = "block";
 				window.location.href = "index.html";
 			} else {
 				document.getElementById("popup-message").textContent = "Error: " + data.error;
-    	    	popup.style.display = "block";
+    	    	popupContainer.style.display = "block";
 			}
 		})
 		.catch(error => {
 			console.error("Error:", error);
 			document.getElementById("popup-message").textContent = "Sign up failed: " + error.message;
-    	    popup.style.display = "block";
+    	    popupContainer.style.display = "block";
 		});
 }
 
@@ -240,11 +240,11 @@ function addContact() {
 		.then(data => {
 			if (data.error === "") {
 				document.getElementById('add-message').style.display = 'block';
-    	    	popup.style.display = "block";
+    	    	popupContainer.style.display = "block";
 				loadContact('${element.FirstName}', '${element.LastName}', '${element.Email}', '${element.Phone}', '${element.ID}');
 			} else {
 				document.getElementById("popup-message").textContent = "Error: " + data.error;
-    	    	popup.style.display = "block";
+    	    	popupContainer.style.display = "block";
 			}
 		})
 		.catch(error => {
@@ -302,17 +302,17 @@ function deleteContact(contactId) {
     .then(data => {
         if (data.error === "") {
 			document.getElementById("popup-message").textContent = "Contact Removed!";
-    	    popup.style.display = "block";
+    	    popupContainer.style.display = "block";
 			loadContact('${element.FirstName}', '${element.LastName}', '${element.Email}', '${element.Phone}', '${element.ID}');
         } else {
 			document.getElementById("popup-message").textContent = "Error: " + data.error;
-    	    popup.style.display = "block";
+    	    popupContainer.style.display = "block";
         }
     })
     .catch(error => {
         console.error("Error:", error);
 		document.getElementById("popup-message").textContent = "Contact removal failed: " + error.message;
-    	popup.style.display = "block";
+    	popupContainer.style.display = "block";
     });
 }
 
@@ -356,17 +356,17 @@ function editContact() {
 		.then(data => {
 			if (data.error === "") {
 				document.getElementById("popup-message").textContent = "Contact Edited!";
-    			popup.style.display = "block";
+    			popupContainer.style.display = "block";
 				window.location.href = "contacts.html";
 			} else {
 				document.getElementById("popup-message").textContent = "Error: " + data.error;
-    			popup.style.display = "block";
+    			popupContainer.style.display = "block";
 			}
 		})
 		.catch(error => {
 			console.error("Error:", error);
 			document.getElementById("popup-message").textContent = "Contact edit failed: " + error.message;
-    		popup.style.display = "block";
+    		popupContainer.style.display = "block";
 		});
 }
 
