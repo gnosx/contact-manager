@@ -304,7 +304,8 @@ function deleteContact(contactId) {
         if (data.error === "") {
 			document.getElementById("popup-message").textContent = "Contact Removed!";
     	    popup.style.display = "block";
-            window.location.reload();
+			
+			loadContact('${element.FirstName}', '${element.LastName}', '${element.Email}', '${element.Phone}', '${element.ID}');
         } else {
 			document.getElementById("popup-message").textContent = "Error: " + data.error;
     	    popup.style.display = "block";
