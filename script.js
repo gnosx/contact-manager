@@ -242,6 +242,7 @@ function addContact() {
 				document.getElementById('add-message').style.display = 'block';
     	    	popup.style.display = "block";
 				window.location.href = "contacts.html";
+				loadContact('${element.FirstName}', '${element.LastName}', '${element.Email}', '${element.Phone}', '${element.ID}');
 			} else {
 				document.getElementById("popup-message").textContent = "Error: " + data.error;
     	    	popup.style.display = "block";
