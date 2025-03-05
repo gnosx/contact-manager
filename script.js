@@ -304,6 +304,7 @@ function deleteContact(contactId) {
         if (data.error === "") {
 			document.getElementById("popup-message").textContent = "Contact Removed!";
     	    popup.style.display = "block";
+			loadContact('${element.FirstName}', '${element.LastName}', '${element.Email}', '${element.Phone}', '${element.ID}');
         } else {
 			document.getElementById("popup-message").textContent = "Error: " + data.error;
     	    popup.style.display = "block";
@@ -314,8 +315,6 @@ function deleteContact(contactId) {
 		document.getElementById("popup-message").textContent = "Contact removal failed: " + error.message;
     	popup.style.display = "block";
     });
-
-	loadContact('${element.FirstName}', '${element.LastName}', '${element.Email}', '${element.Phone}', '${element.ID}');
 }
 
 function loadContact(firstName, lastName, email, phoneNumber, ID) {
