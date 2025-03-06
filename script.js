@@ -220,6 +220,12 @@ function addContact() {
 	let cPhoneNumber = document.getElementById("phoneNumber").value;
 	let cEmail = document.getElementById("email").value;
 
+	// check if email if valid
+	if (!cEmail.includes('@')) {
+		document.getElementById("popup-message").textContent = "Error: " + data.error;
+    	popupContainer.style.display = "block";
+        return;
+    }
 
 	let tmp = { firstName: cFirstName, lastName: cLastName, phoneNumber: cPhoneNumber, email: cEmail, userId: userId };
 	let jsonPayload = JSON.stringify(tmp);
