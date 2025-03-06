@@ -280,7 +280,6 @@ function searchContact() {
 
 function deleteContact(contactId) {
     if (!confirm("Are you sure you want to delete this contact?")) {
-		window.location.href = "contacts.html";
         return;
     }
 
@@ -315,6 +314,8 @@ function deleteContact(contactId) {
 		document.getElementById("popup-message").textContent = "Contact removal failed: " + error.message;
     	popupContainer.style.display = "block";
     });
+
+	window.location.href = "contacts.html";
 }
 
 function loadContact(firstName, lastName, email, phoneNumber, ID) {
