@@ -280,6 +280,7 @@ function searchContact() {
 
 function deleteContact(contactId) {
     if (!confirm("Are you sure you want to delete this contact?")) {
+		window.location.href = "contacts.html";
         return;
     }
 
